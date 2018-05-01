@@ -9,7 +9,7 @@ class Offer(models.Model):
     description = models.CharField(max_length=200)
     added_date = models.DateTimeField(auto_now_add=True)
     photo = models.ImageField(default='not sure')
-    user = models.ForeignKey('account.User', on_delete=models.CASCADE)
+    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('-added_date',)
@@ -47,14 +47,14 @@ class Family(models.Model):
 #A dib belongs to a user (parent=False).
 #A dib belongs to an offer? Maybe allow multiple users to call dibs but ordered by timestamp.
 class Dib(models.Model):
-    user = models.ForeignKey('account.User', on_delete=models.CASCADE)
+    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
     offer = models.ForeignKey('Offer', on_delete=models.CASCADE)
     dib_time_stamp = models.DateTimeField(auto_now_add=True)
 
 #A dibcomment belongs to a user (parent=False).
 #A dibcomment belongs to an offer.
 class DibComment(models.Model):
-    user = models.ForeignKey('account.User', on_delete=models.CASCADE)
+    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
     offer = models.ForeignKey('Offer', on_delete=models.CASCADE)
     dib_comment_time_stamp = models.DateTimeField(auto_now_add=True)
  
