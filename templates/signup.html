@@ -3,6 +3,9 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
+
+<p><a href="{% url 'login' %}">Already have an account? Click here to log in</a></p>
+
     <h2>Sign up</h2>
     <form method="post">
         {% csrf_token %}
