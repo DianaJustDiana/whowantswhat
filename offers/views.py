@@ -24,7 +24,7 @@ def new_offer(request):
             form.save()
             #TODO check the offers:offers
             #After user addes new offer, redirect user to offers page.
-            return HttpResponseRedirect(reverse('offers:offers'))
+            return HttpResponseRedirect(reverse('offers:index'))
 
     context = {'form': form}
     return render(request, 'offers/new_offer.html', context)
