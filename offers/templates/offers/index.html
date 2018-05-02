@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    Hi, {{ user.username }}!
+    <p><a href="{% url 'logout' %}">Click here to log out</a></p> 
+    <br>
+    <p><a href=/offers/new_offer/ >Click here to add an offer</a></p>  
+    <p>Offers</p>
+
+{% endblock content %}
+

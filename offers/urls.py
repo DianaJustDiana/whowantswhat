@@ -1,4 +1,4 @@
-"""Defintes URL patterns for offers app."""
+"""Defines URL patterns for offers app."""
 
 from django.urls import path
 from . import views

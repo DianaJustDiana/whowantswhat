@@ -9,6 +9,6 @@ from django.views import generic
 class SignUp(generic.CreateView):
     #Also here -- need to use my version of the form instead of the default one.
     form_class = MyUserCreationForm
-    #Redirects user to the login page after registering. Might change this later.
+    #Redirects user to the login page after registering. TODO Might change this later.
     success_url = reverse_lazy('login')
     template_name = 'signup.html'

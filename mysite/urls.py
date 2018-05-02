@@ -24,5 +24,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     #For pages in my Offers app within Mysite.
-    #path('home/', include('offers.urls')),
+    path('offers/', include('offers.urls')),
+
 ]

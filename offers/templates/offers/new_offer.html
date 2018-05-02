@@ -1,8 +1,8 @@
-{% extends 'mysite/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
     <p>Add a new offer:</p>
-    <form action="{% url 'mysite:new_offer' %}" method='post'>
+    <form action=/offers/new_offer/ method='post'>
         <!--For security.-->
         {% csrf_token %}
         <!--Renders form elements inside paragraph tags.-->
