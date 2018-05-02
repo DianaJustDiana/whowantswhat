@@ -4,6 +4,9 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
+
+<a href=/accounts/signup/ >Not signed up? Click here to register</a>
+
 <h2>Log in</h2>
 <form method="post">
     <!--For security; prevents XSS attack.-->
@@ -13,3 +16,5 @@
     <button type="submit">Login</button>
 </form>
 {% endblock %}
+
+
