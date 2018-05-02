@@ -1,4 +1,6 @@
 from django.db import models
+#from accounts.models import User
+
 #Need the next two lines because my User is actually accounts.User.
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -12,7 +14,7 @@ class Offer(models.Model):
     description = models.CharField(max_length=200)
     added_date = models.DateTimeField(auto_now_add=True)
     photo = models.ImageField(default='not sure')
-    owner = models.ForeignKey(User, related_name = 'offer_offers', on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('-added_date',)
@@ -50,14 +52,14 @@ class Offer(models.Model):
 #A dib belongs to a user (parent=False).
 #A dib belongs to an offer? Maybe allow multiple users to call dibs but ordered by timestamp.
 class Dib(models.Model):
-    owner = models.ForeignKey(User, related_name = 'offer_dibs', on_delete=models.CASCADE)
-    offer = models.ForeignKey(Offer, related_name = 'offer_dibs', on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    offer = models.ForeignKey(Offer, on_delete=models.CASCADE)
     dib_time_stamp = models.DateTimeField(auto_now_add=True)
 
 #A dibcomment belongs to a user (parent=False).
 #A dibcomment belongs to an offer.
 class DibComment(models.Model):
-    owner = models.ForeignKey(User, related_name = 'offer_dibcomments', on_delete=models.CASCADE)
-    offer = models.ForeignKey(Offer, related_name = 'offer_dibcomments', on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    offer = models.ForeignKey(Offer, on_delete=models.CASCADE)
     dib_comment_time_stamp = models.DateTimeField(auto_now_add=True)
  
