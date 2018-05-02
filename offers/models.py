@@ -1,4 +1,7 @@
 from django.db import models
+#Need the next two lines because my User is actually accounts.User.
+#from django.contrib.auth import get_user_model
+#User = get_user_model()
 
 # Create your models here.
 
@@ -54,7 +57,7 @@ class Dib(models.Model):
 #A dibcomment belongs to a user (parent=False).
 #A dibcomment belongs to an offer.
 class DibComment(models.Model):
-    users = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
+    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
     offer = models.ForeignKey('Offer', on_delete=models.CASCADE)
     dib_comment_time_stamp = models.DateTimeField(auto_now_add=True)
  
