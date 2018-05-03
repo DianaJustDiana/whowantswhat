@@ -11,9 +11,11 @@ User = get_user_model()
 #An offer has many dibs.
 class Offer(models.Model):
     """An offer made by a user."""
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=255)
     added_date = models.DateTimeField(auto_now_add=True)
-    photo = models.ImageField(default='not sure')
+    #TODO need to add default image.
+    #Image will be uploaded to MEDIA_ROOT/offerpics/.
+    photo = models.ImageField(upload_to='offerpics/',default='images-9.jpeg')
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:

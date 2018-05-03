@@ -27,7 +27,8 @@ def new_offer(request):
         form = OfferForm()
     else:
         #POST data submitted; process data.
-        form = OfferForm(data=request.POST)
+        #Two bits here -- request.POST for text, request.FILES for images.
+        form = OfferForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             #TODO check the offers:offers
