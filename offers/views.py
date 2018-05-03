@@ -10,8 +10,16 @@ from .forms import OfferForm
 #Should be a GET request. That's the default, so no need to specify.
 def index(request):
     """Home page for Mysite. Will display index of offers."""
-    return render(request, 'offers/index.html')
+    offers = Offer.objects.all()
+    #Context is the dictionary of info that populates the offers/index template.
+    context = {
+        "title": "All the offers",
+        "offers": offers,
+    }
 
+    return render(request, 'offers/index.html', context)
+    
+#Works with POST or other (usually that means GET).
 def new_offer(request):
     """User can add a new offer."""
     if request.method != 'POST':
@@ -23,7 +31,7 @@ def new_offer(request):
         if form.is_valid():
             form.save()
             #TODO check the offers:offers
-            #After user addes new offer, redirect user to offers page.
+            #After user addes new offer, redirect user to offers index page.
             return HttpResponseRedirect(reverse('offers:index'))
 
     context = {'form': form}
