@@ -5,9 +5,8 @@
     <p><a href="{% url 'logout' %}">Click here to log out</a></p> 
     <br>
     <p><a href=/offers/new_offer/ >Click here to add an offer</a></p>  
-  
-    <h1>{{ title }}</h1>
-    
+    <h1>{{ title }} </h1>
+
     {% if not offers %}
         <p>No offers yet</p>
     {% else %}
@@ -18,8 +17,11 @@
             
             <li>
                 {{ offer.description }}
-                {{ offer.owner }}
-                {{ offer.photo }}
+                
+                <li>
+                
+                <img src="{{ offer.photo }}"></a>
+
             </li>
             {% endfor %}
         </ul>
@@ -28,4 +30,5 @@
 
 
 {% endblock content %}
+
 

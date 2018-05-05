@@ -3,14 +3,19 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from .models import Offer
+from .models import Offer, User
 from .forms import OfferForm
 
 # Create your views here.
 #Should be a GET request. That's the default, so no need to specify.
 def index(request):
     """Home page for Mysite. Will display index of offers."""
+    #This is a queryset that grabs all the objects from the Offer table.
     offers = Offer.objects.all()
+    
+    #Still working on filtering show it shows just offers by parent.
+    #offers = Offer.objects.filter(owner=3)
+    
     #Context is the dictionary of info that populates the offers/index template.
     context = {
         "title": "All the offers",
