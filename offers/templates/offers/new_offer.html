@@ -2,8 +2,9 @@
 
 {% block content %}
     <p>Add a new offer:</p>
-    <!--TODO Fix this link so it's URL style.-->
-    <form action=/offers/new_offer/ method='post' enctype='multipart/form-data'>
+    <!--<form action=/offers/new_offer/ -->
+    <!--The above works fine as well.-->
+    <form action="{% url 'offers:new_offer' %}" method='post' enctype='multipart/form-data'>
         <!--For security.-->
         {% csrf_token %}
         <!--Renders form elements inside paragraph tags.-->
