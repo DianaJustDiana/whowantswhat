@@ -1,7 +1,8 @@
 <!-- templates/home.html -->
 {% extends 'base.html' %}
 
-{% block title %}Home{% endblock %}
+<!--{% block title %}WhoWantsWhat{% endblock %}-->
+
 
 {% block content %}
 
@@ -9,9 +10,29 @@
     Hi, {{ user.username }}!
     <p><a href="{% url 'logout' %}">Click here to log out</a></p>
 {% else %}
-    <h1>Hed goes here</h1>
-    <h3>This is where the nutgraf goes, nutgraf goes, nutgraf goes. This is where the nutgraf goes. This is where it goes.</h3>
-    <!--<h1>Hed goes here -- maybe WhoWantsWhat?</h1>
+    <div class="jumbotron text-center">
+        <h1>WhoWantsWhat?</h1>
+        <p>This is where the nutgraf goes, nutgraf goes, nutgraf goes. This is where the nutgraf goes. This is where it goes.</p> 
+    </div>
+    <div class="container-fluid text-center"> 
+        <h3>How it works</h3>
+        <div class="row">
+          <div class="col-sm-4">
+            <p>Take photos of your stuff and add them to your page. Uploading is easy -- just follow the prompts and click the buttons.</p>
+            <img src="/media/furniture/taking_a_picture.png" class="img-responsive" style="width:100%" alt="Image description goes here">
+          </div>
+          <div class="col-sm-4">
+            <!--TODO Check this text; might not be able to send evites.-->
+            <p>Invite your family and friends to view your items. We'll send evites for you. (Not sure I'll be able to do that, though. Check this later.</p>
+            <img src="/media/furniture/spread_out_family_better.png" class="img-responsive" style="width:100%" alt="Image description goes here">
+          </div>
+          <div class="col-sm-4"> 
+            <p>Your family and friends choose the items they'd like to have. See who calls dibs!</p>
+            <img src="/media/furniture/julia_calls_dibs.png" class="img-responsive" style="width:100%" alt="Image description goes here">
+          </div>
+        </div>
+      </div>
+<!--<h1>Hed goes here -- maybe WhoWantsWhat?</h1>
 
     <h3>Explanatory text goes here. Maybe something like this:
     <br>
@@ -26,3 +47,4 @@
 
 {% endif %}
 {% endblock %}
+
