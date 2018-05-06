@@ -16,10 +16,14 @@ def index(request):
     #Still working on filtering show it shows just offers by parent.
     #offers = Offer.objects.filter(owner=3)
     
+    #Trying out sessions.
+    #current_user = request.user
+    
     #Context is the dictionary of info that populates the offers/index template.
     context = {
         "title": "All the offers",
         "offers": offers,
+    #    "current_user": current_user,
     }
 
     return render(request, 'offers/index.html', context)
