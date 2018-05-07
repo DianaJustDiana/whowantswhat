@@ -12,11 +12,14 @@ Technologies:
 * someplace TBA (Heroku? Google Cloud? PythonAnywhere?) for site hosting
 
 Wireframes:
-![Image of home page](https://github.com/DianaJustDiana/whowantswhat/blob/master/wireframes/wireframe_homepage.jpg)
-![Image of login page](https://github.com/DianaJustDiana/whowantswhat/blob/master/wireframes/wireframe_login.jpg)
-![Image of signup page](https://github.com/DianaJustDiana/whowantswhat/blob/master/wireframes/wireframe_register.jpg)
+[Image of home page](https://github.com/DianaJustDiana/whowantswhat/blob/master/wireframes/wireframe_homepage.jpg)
 
+[Image of login page](https://github.com/DianaJustDiana/whowantswhat/blob/master/wireframes/wireframe_login.jpg)
 
-![Image of child index page](https://github.com/DianaJustDiana/whowantswhat/blob/master/wireframes/wireframe_child_index.jpg)
-![Image of parent index page](https://github.com/DianaJustDiana/whowantswhat/blob/master/wireframes/wireframe_parent_index.jpg)
-![Image of new_offer page](https://github.com/DianaJustDiana/whowantswhat/blob/master/wireframes/wireframe_new_offer.jpg)
+[Image of signup page](https://github.com/DianaJustDiana/whowantswhat/blob/master/wireframes/wireframe_register.jpg)
+
+[Image of child index page](https://github.com/DianaJustDiana/whowantswhat/blob/master/wireframes/wireframe_child_index.jpg)
+
+[Image of parent index page](https://github.com/DianaJustDiana/whowantswhat/blob/master/wireframes/wireframe_parent_index.jpg)
+
+[Image of new_offer page](https://github.com/DianaJustDiana/whowantswhat/blob/master/wireframes/wireframe_new_offer.jpg)
