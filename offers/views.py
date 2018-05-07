@@ -46,3 +46,9 @@ def new_offer(request):
 
     context = {'form': form}
     return render(request, 'offers/new_offer.html', context)
+
+
+#TODO See if user
+#def is_registered():
+#    registered_user = User.objects.filter_by(email=email).first()
+        

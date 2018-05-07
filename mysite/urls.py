@@ -29,9 +29,12 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     #For pages in my Offers app within Mysite.
-    path('offers/', include('offers.urls')),
-
+    path('offers/', include('offers.urls')),  
 ]
+
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+urlpatterns += staticfiles_urlpatterns()
+
 
 #Need this to see user-uploaded images during development only.
 if settings.DEBUG:
