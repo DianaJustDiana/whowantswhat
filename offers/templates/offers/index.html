@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    Hi, {{ user.username }}!
-    <p><a href="{% url 'logout' %}">Click here to log out</a></p> 
+    <!--Hi, {{ user.username }}!-->
+    <!--<p><a href="{% url 'logout' %}">Click here to log out</a></p> 
+    <p><a href="{% url 'home' %}">Click here to return to the home page</a></p>
+    -->
     <br>
     <!--To make this href work, need to add namespace: to it. 
     So here it's 'offers:new_offer' instead of simply 'new_offer.
     WARNING: It's 'new_offer' in urls.py but here it needs to be 'offers:new_offer'-->
-    <p><a href="{% url 'offers:new_offer' %}" >Click here to add an offer</a></p>  
+    <!--<p><a href="{% url 'offers:new_offer' %}" >Click here to add an offer</a></p> --> 
     <h1>{{ title }} </h1>
 
     <!--testing some stuff here

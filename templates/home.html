@@ -6,13 +6,9 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
-    Hi, {{ user.username }}!
-    <p><a href="{% url 'logout' %}">Click here to log out</a></p>
-{% else %}
-    <div class="jumbotron text-center">
-        <h1>WhoWantsWhat?</h1>
-        <p>This is where the nutgraf goes, nutgraf goes, nutgraf goes. This is where the nutgraf goes. This is where it goes.</p> 
+    <div class="jumbotron text-left">
+        <h1>WhoWantsWhat</h1>
+        <p>Downsizing? This is where the nutgraf goes, nutgraf goes, nutgraf goes. This is where the nutgraf goes. This is where it goes.</p> 
     </div>
     <div class="container-fluid text-center"> 
         <h3>How it works</h3>
@@ -32,19 +28,6 @@
           </div>
         </div>
       </div>
-<!--<h1>Hed goes here -- maybe WhoWantsWhat?</h1>
 
-    <h3>Explanatory text goes here. Maybe something like this:
-    <br>
-    Downsizing? Want to share your excess stuff -- from ho-hum to heirloom -- with family and friends? List it here and invite others to call dibs on the items they’d like to have.</h3>
-    -->
-    <!-- <p>You are not logged in</p> -->
-    <a href="{% url 'login' %}">Already have an account? Click here to log in</a>
-    <br>
-    <br>
-    <!--<a href=/accounts/signup/ >Not signed up? Click here to register</a>-->
-    <a href="{% url 'signup' %}">Not signed up? Click here to register</a>
-
-{% endif %}
 {% endblock %}
 
