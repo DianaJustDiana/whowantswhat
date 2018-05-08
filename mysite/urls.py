@@ -31,9 +31,9 @@ urlpatterns = [
     #For pages in my Offers app within Mysite.
     path('offers/', include('offers.urls')),  
 ]
-
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-urlpatterns += staticfiles_urlpatterns()
+#TODO Not sure what these lines did. Let's remove and see what happens.
+#from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+#urlpatterns += staticfiles_urlpatterns()
 
 
 #Need this to see user-uploaded images during development only.

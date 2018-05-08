@@ -1,4 +1,4 @@
-"""Defintes URL patterns for accounts app."""
+"""Defines URL patterns for accounts app."""
 
 
 from django.urls import path

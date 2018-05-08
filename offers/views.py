@@ -12,19 +12,19 @@ def index(request):
     """Home page for Mysite. Will display index of offers."""
     #This is a queryset that grabs all the objects from the Offer table.
     #offers = Offer.objects.all()
+    
+    #TODO Alter this query so it grabs all objects from the current user's FAMILY.
+    #This queryset grabs only the objects where the owner is the current user.
     current_user = request.user
     offers = Offer.objects.filter(owner=current_user)
-    #Still working on filtering show it shows just offers by parent.
-    #offers = Offer.objects.filter(owner=3)
     
-    #Trying out sessions.
-    #current_user = request.user
+    
+    
     
     #Context is the dictionary of info that populates the offers/index template.
     context = {
         "title": "Stuff I'm offering",
         "offers": offers,
-    #    "current_user": current_user,
     }
 
     return render(request, 'offers/index.html', context)
@@ -51,10 +51,4 @@ def new_offer(request):
             return HttpResponseRedirect(reverse('offers:index'))
 
     context = {'form': form}
-    return render(request, 'offers/new_offer.html', context)
-
-
-#TODO See if user
-#def is_registered():
-#    registered_user = User.objects.filter_by(email=email).first()
-        
+    return render(request, 'offers/new_offer.html', context) 
