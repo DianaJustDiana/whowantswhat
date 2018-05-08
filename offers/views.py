@@ -11,8 +11,9 @@ from .forms import OfferForm
 def index(request):
     """Home page for Mysite. Will display index of offers."""
     #This is a queryset that grabs all the objects from the Offer table.
-    offers = Offer.objects.all()
-    
+    #offers = Offer.objects.all()
+    current_user = request.user
+    offers = Offer.objects.filter(owner=current_user)
     #Still working on filtering show it shows just offers by parent.
     #offers = Offer.objects.filter(owner=3)
     
@@ -21,7 +22,7 @@ def index(request):
     
     #Context is the dictionary of info that populates the offers/index template.
     context = {
-        "title": "All the offers",
+        "title": "Stuff I'm offering",
         "offers": offers,
     #    "current_user": current_user,
     }
@@ -38,9 +39,14 @@ def new_offer(request):
         #POST data submitted; process data.
         #Two bits here -- request.POST for text, request.FILES for images.
         form = OfferForm(request.POST, request.FILES)
+
         if form.is_valid():
+            #Saving the form with commit=False generates an object called "form."
+            form = form.save(commit=False)       
+            #Here's where I can add extra data and make the object's owner the current user. 
+            form.owner = request.user
+            #Then save again for real.
             form.save()
-            #TODO check the offers:offers
             #After user addes new offer, redirect user to offers index page.
             return HttpResponseRedirect(reverse('offers:index'))
 

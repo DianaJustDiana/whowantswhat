@@ -10,14 +10,14 @@
     So here it's 'offers:new_offer' instead of simply 'new_offer.
     WARNING: It's 'new_offer' in urls.py but here it needs to be 'offers:new_offer'-->
     <!--<p><a href="{% url 'offers:new_offer' %}" >Click here to add an offer</a></p> --> 
-    <h1>{{ title }} </h1>
+    <h1>{{ title }}</h1>
 
     <!--testing some stuff here
     <h3>{{current_user}}</h3>    
     end testing-->
 
     {% if not offers %}
-        <p>No offers yet</p>
+        <p>Nothing yet</p>
     {% else %}
     
 
@@ -27,12 +27,10 @@
             <li>
                 {{ offer.description }}
                 
-                <li>
                 
                  <!-- <img src="{{ offer.photo }}"></a>               -->
 
               <img src="/media/{{ offer.photo }}"> 
-
             </li>
             {% endfor %}
         </ul>
