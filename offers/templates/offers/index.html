@@ -24,14 +24,18 @@
         <ul>
             {% for offer in offers %}
             
-            <li>
-                {{ offer.description }}
+                <!--{{ offer.description }}-->
                 
                 
                  <!-- <img src="{{ offer.photo }}"></a>               -->
-
-              <img src="/media/{{ offer.photo }}"> 
-            </li>
+                
+                
+                 <div class="gallery">
+                          <img src="/media/{{ offer.photo }}" alt="TODO" width="300" >
+                        </a>
+                        <div class="desc">{{ offer.description }}</div>
+                      </div>
+              <!--<img src="/media/{{ offer.photo }}"> -->
             {% endfor %}
         </ul>
 

@@ -153,3 +153,6 @@ AUTH_USER_MODEL = 'accounts.User'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#TODO list:
+# When user closes the tab or closes the browser, automatically log them out.
