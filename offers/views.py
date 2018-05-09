@@ -6,8 +6,12 @@ from django.urls import reverse
 from .models import Offer, User
 from .forms import OfferForm
 
+#Need for @login required decorator.
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 #Should be a GET request. That's the default, so no need to specify.
+@login_required
 def index(request):
     """Home page for Mysite. Will display index of offers."""
     #This is a queryset that grabs all the objects from the Offer table.
@@ -29,6 +33,7 @@ def index(request):
 
     return render(request, 'offers/index.html', context)
     
+@login_required    
 #Works with POST or other (usually that means GET).
 def new_offer(request):
     """User can add a new offer."""
