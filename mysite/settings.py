@@ -156,5 +156,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #TODO list:
 # When user closes the tab or closes the browser, automatically log them out.
-# Limit certain routes to user who's signed in.
+# Should I block a logged-in user from visiting the login page again? NO --
+#   Instead, add line to top of login page asking: Want to log in as another user?
+#   Also, find out if logging in as a second used automatically logs out the first one.
+# Should I block a logged-in user from visiting the signup page? NO --
+#   Instead, add line to top of signup page asking: Want to create a new account?
+# Should I block a logged-in user from visiting the admin site? 
+#   They can't log in, but they can see the screen.
+#   If this were a big concern, wouldn't Django already have an easy solution for this?
+#   Like a @none_of_your_beeswax decorator?
+#   Alt idea: Change name from "admin" to "gobbledygook" or some other word the user won't guess.
+# Need a way to resize user images upon upload. Does Pillow package include a way to do this?
 
