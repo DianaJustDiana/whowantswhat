@@ -12,9 +12,12 @@ from accounts.models import User, Family
 class OfferAdmin(admin.ModelAdmin):
     list_display = ('description', 'added_date', 'photo', 'owner')
 
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('username', 'email', 'id')
+
 
 admin.site.register(Offer, OfferAdmin)
-admin.site.register(User)
+admin.site.register(User, UserAdmin)
 admin.site.register(Family)
 
 
