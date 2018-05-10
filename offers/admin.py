@@ -6,7 +6,8 @@ User = get_user_model()
 # Register your models here.
 #My app is called offers and the main model inside it is Offer.
 from .models import Offer
-from accounts.models import User, Family
+from accounts.models import User
+#, Family
 
 
 class OfferAdmin(admin.ModelAdmin):
@@ -18,6 +19,6 @@ class UserAdmin(admin.ModelAdmin):
 
 admin.site.register(Offer, OfferAdmin)
 admin.site.register(User, UserAdmin)
-admin.site.register(Family)
+#admin.site.register(Family)
 
 
