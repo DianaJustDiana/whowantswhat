@@ -10,7 +10,7 @@ from accounts.models import User, Family
 
 
 class OfferAdmin(admin.ModelAdmin):
-    list_display = ('description', 'added_date', 'photo', 'owner')
+    list_display = ('description', 'added_date', 'photo', 'owner', 'owner_id')
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username', 'email', 'id')
