@@ -24,7 +24,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    path('admin/', admin.site.urls),
+    #Changed admin path to hide it.
+    path('unsweetenedicedtea/', admin.site.urls),
     #Put accounts.urls on top so Django sees it before the one in the built-in auth app.
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
