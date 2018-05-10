@@ -1,0 +1,16 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>Invite others to join your family group:</p>
+<!--<form action=/offers/new_offer/ -->
+    <!--The above works fine as well.-->
+    <form action="{% url 'family_groups:join_a_family_group' %}" method='post'>
+        <!--For security.-->
+        {% csrf_token %}
+        <!--Renders form elements inside paragraph tags.-->
+        {{ form.as_p}}
+        <button name="submit">Send invitation</button>
+    </form>
+{% endblock content %}
