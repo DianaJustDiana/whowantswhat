@@ -10,6 +10,8 @@ User = get_user_model()
 #native user model already includes that.
 class MyUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
+    #Added this so users can see family's stuff.
+    #first_name = forms.CharField(required=False, help_text="family's secret password")
 
     class Meta:
         model = User
@@ -24,3 +26,4 @@ class MyUserCreationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
