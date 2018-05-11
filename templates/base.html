@@ -54,6 +54,17 @@
                             </li>
                             {% endif %}
 
+
+
+                            {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'family_groups:create_a_family' %}">Create a family group</a>
+                            </li>
+                            {% endif %}
+
+
+
+
                             {% if user.is_authenticated %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'logout' %}">Log out</a>
