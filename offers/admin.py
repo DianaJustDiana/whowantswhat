@@ -16,6 +16,9 @@ class OfferAdmin(admin.ModelAdmin):
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username', 'email', 'id')
 
+class FamilyGroupAdmin(admin.ModelAdmin):
+    list_display = ()
+
 
 admin.site.register(Offer, OfferAdmin)
 admin.site.register(User, UserAdmin)

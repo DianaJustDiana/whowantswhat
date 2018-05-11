@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<p>Invite others to join your family group:</p>
+<p>Add others to your family group:</p>
 <!--<form action=/offers/new_offer/ -->
     <!--The above works fine as well.-->
     <form action="{% url 'family_groups:join_a_family_group' %}" method='post'>
@@ -11,6 +11,6 @@
         {% csrf_token %}
         <!--Renders form elements inside paragraph tags.-->
         {{ form.as_p}}
-        <button name="submit">Send invitation</button>
+        <button name="submit">Add this member</button>
     </form>
 {% endblock content %}

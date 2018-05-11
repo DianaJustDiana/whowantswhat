@@ -9,7 +9,7 @@ User = get_user_model()
 #A family has many users.
 #A family contains one parent.
 class Family(models.Model):
-    """A group of users."""
+    """Has many family members."""
     family_name = models.CharField(max_length=20)
     parent = models.ForeignKey(User, on_delete=models.CASCADE)
 
