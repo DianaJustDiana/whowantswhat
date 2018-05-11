@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>Add someone to your family:</p>
+<!--<form action=/offers/new_offer/ -->
+    <!--The above works fine as well.-->
+    <form action="{% url 'family_groups:add_members' %}" method='post'>
+        <!--For security.-->
+        {% csrf_token %}
+        <!--Renders form elements inside paragraph tags.-->
+        {{ form.as_p}}
+        <button name="submit">Add a member</button>
+    </form>
+{% endblock content %}

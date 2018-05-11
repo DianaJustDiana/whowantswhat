@@ -21,6 +21,6 @@ class Family(models.Model):
         return self.family_name
 
 #A FamilyMember belongs to a Family.
-class FamilyMember(models.Model):
+class Member(models.Model):
     family = models.ForeignKey(Family, on_delete=models.CASCADE)
     member = models.OneToOneField(User, on_delete=models.CASCADE)
