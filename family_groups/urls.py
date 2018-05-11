@@ -7,6 +7,8 @@ from . import views
 app_name = 'family_groups'
 
 urlpatterns = [
+    #User can see listing of family groups.
+    path('', views.index, name='index'),
     #User can create a family group.
     path('create_a_family/', views.create_a_family, name='create_a_family'),
     #User can add members to the family group.

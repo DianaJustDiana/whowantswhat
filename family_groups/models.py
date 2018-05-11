@@ -10,7 +10,7 @@ User = get_user_model()
 #A family contains one parent.
 class Family(models.Model):
     """Has many family members."""
-    family_name = models.CharField(max_length=20)
+    family_name = models.CharField(max_length=200)
     parent = models.ForeignKey(User, on_delete=models.CASCADE)
 
     #This fixes plural form so it's 'families' instead of default 'familys.'

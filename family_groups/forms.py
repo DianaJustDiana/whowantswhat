@@ -13,4 +13,4 @@ class AddMembersForm(forms.ModelForm):
     class Meta:
         model = Member
         fields = ['family', 'member']
-        labels = {'family' : 'pick one', 'member' : 'not sure what to put here'}
+        labels = {'member' : 'add a person by email address'}

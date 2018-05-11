@@ -54,7 +54,7 @@ def new_offer(request):
             form.owner = request.user
             #Then save again for real.
             form.save()
-            #After user addes new offer, redirect user to offers index page.
+            #After user adds new offer, redirect user to offers index page.
             return HttpResponseRedirect(reverse('offers:index'))
 
     context = {'form': form}
