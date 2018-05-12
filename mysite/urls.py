@@ -30,7 +30,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     #For pages in my Offers app within Mysite.
-    path('offers/', include('offers.urls')),  
+    path('offers/', include('offers.urls')),
     path('family_groups/', include('family_groups.urls')),
 ]
 #TODO Not sure what these lines did. Let's remove and see what happens.

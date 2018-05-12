@@ -58,4 +58,4 @@ def new_offer(request):
             return HttpResponseRedirect(reverse('offers:index'))
 
     context = {'form': form}
-    return render(request, 'offers/new_offer.html', context) 
+    return render(request, 'offers/new_offer.html', context)
