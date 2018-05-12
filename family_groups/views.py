@@ -35,7 +35,8 @@ def create_a_family(request):
     context = {'form': form}
     return render(request, 'family_groups/create_a_family.html', context) 
 
-#@login_required sends unvalidated users to url of my choosing. In this case, the home page.    
+#@login_required sends unvalidated users to url of my choosing. In this case, the home page.  
+#TODO Limit this! Available only to a user who is already a parent to a group.  
 @login_required(login_url='/')  
 def add_members(request):
     """Parent of family group can add members."""
