@@ -20,7 +20,8 @@ class Family(models.Model):
     def __str__(self):
         return self.family_name
 
-#A FamilyMember belongs to a Family.
+#A Member belongs to a Family.
 class Member(models.Model):
     family = models.ForeignKey(Family, on_delete=models.CASCADE)
-    member = models.OneToOneField(User, on_delete=models.CASCADE)
+    #name = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.ForeignKey(User, on_delete=models.CASCADE)

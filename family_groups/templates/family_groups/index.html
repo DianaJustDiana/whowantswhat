@@ -9,19 +9,19 @@
     <!--<p><a href="{% url 'offers:new_offer' %}" >Click here to add an offer</a></p> --> 
     <h1>{{ title }}</h1>
 
-    <!--testing some stuff here
-    <h3>{{current_user}}</h3>    
-    end testing-->
 
-    {% if not family %}
+    {% if not family_groups %}
         <p>Nothing yet</p>
     {% else %}
         <ul>
-            {% for family in families %}           
-                <!--{{ offer.description }}-->
-                
-                
-                <div class="desc">{{ family.family_name }}</div>
+            {% for family_group in family_groups %}  
+
+                <div class="desc">{{ family_group.family_name }}</div>
+                {% for member in members %}
+                <div class="desc">{{ member.name }}</div>
+                {% endfor %}
+                <br>
+
             {% endfor %}
         </ul>
 

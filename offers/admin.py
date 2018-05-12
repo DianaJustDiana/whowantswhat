@@ -7,7 +7,7 @@ User = get_user_model()
 #My app is called offers and the main model inside it is Offer.
 from .models import Offer
 from accounts.models import User
-from family_groups.models import Family
+from family_groups.models import Family, Member
 #, Family
 
 
@@ -20,9 +20,13 @@ class UserAdmin(admin.ModelAdmin):
 class FamilyAdmin(admin.ModelAdmin):
     list_display = ('family_name', 'parent')
 
+class MemberAdmin(admin.ModelAdmin):
+    list_display = ('family', 'name')
+
 
 admin.site.register(Offer, OfferAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Family, FamilyAdmin)
+admin.site.register(Member, MemberAdmin)
 
 

@@ -50,7 +50,7 @@ def add_members(request):
             #form = form.save(commit=False)    
             #Here's where I can add extra data and make the object belong to the family group.
             #form.family = request.user. 
-            form=form.save()
+            form = form.save()
             #After user addes new offer, redirect user to offers index page.
             return HttpResponseRedirect(reverse('offers:index'))
     
@@ -63,14 +63,17 @@ def add_members(request):
 def index(request):
     """Will display index of parent's family and the family members."""
     current_user = request.user
-    family_groups = Family.objects.filter(parent=current_user)
-    #members = Member.objects.filter()
-    
+    #If current user is parent to a family group, this will gather them.
+    #TODO If current user is NOT a parent, this throws an error.
+    list_of_family_groups = Family.objects.filter(parent=current_user)
+    f = Family.objects.get(parent=current_user)
+    members = f.member_set.all()
+
     #Context is the dictionary of info that populates the family_groups/index template.
     context = {
         "title": "My family groups",
-        "families": family_groups
-       # "members": members,
+        "family_groups": list_of_family_groups,
+        "members": members,
     }
 
     return render(request, 'family_groups/index.html', context)
