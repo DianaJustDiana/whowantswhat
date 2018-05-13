@@ -1,7 +1,9 @@
 <!-- templates/base.html -->
 
 
+{% load custom_tags %}
 {% load static %}
+
 
 <!DOCTYPE html>
 
@@ -41,6 +43,12 @@
                                 <a class="nav-link" >Hi, {{ user.username }}!</a>
                             </li>
                             {% endif %}
+
+                            <!--TODO Ask Brian to look at this.-->
+                            <!--To make this work, add curly brace and percentage symbol to each side of user.is_parent.-->
+                            <!--<p>HELLO!!  user.is_parent </p>-->
+
+                        
 
                             {% if user.is_authenticated %}
                             <li class="nav-item active">

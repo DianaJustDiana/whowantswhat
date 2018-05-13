@@ -26,9 +26,16 @@ def create_a_family(request):
             #Saving the form with commit=False generates an object called "form."
             form = form.save(commit=False)       
             #Here's where I can add extra data and make the object's parent the current user. 
-            form.parent = request.user
+            current_user = request.user
+            #This changes boolean to True so I can use .is_parent to shield some views.
+            #TODO Ask Brian to look at this.
+            current_user.is_parent = True        
+            #This makes the user creating a family group the parent of that group.
+            form.parent = current_user
             #Then save again for real.
             form.save()
+            #TODO Remove this once the custom template tag is working.
+            print(current_user.is_parent)
             #TODO Change this so after user creates a family group, redirect user to add members form.
             return HttpResponseRedirect(reverse('family_groups:add_members'))
 
@@ -65,8 +72,9 @@ def index(request):
     """Will display index of parent's family and the family members."""
     current_user = request.user
     #If current user is parent to a family group, this will gather them.
-    #TODO If current user is NOT a parent, this throws an error.
+    #TODO Why is this broken? If current user is NOT a parent, this throws an error.
     list_of_family_groups = Family.objects.filter(parent=current_user)
+    #TODO Marking this QuerySet so I can find it easily. Important part is member_set.
     f = Family.objects.get(parent=current_user)
     members = f.member_set.all()
 
@@ -78,12 +86,6 @@ def index(request):
     }
 
     return render(request, 'family_groups/index.html', context)
-
-
-    current_user = request.user
-    offers = Offer.objects.filter(owner=current_user)
-    
-    
     
     
     

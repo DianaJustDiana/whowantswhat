@@ -38,10 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #TODO Added for custom template tag. But tag isn't working.
+    'mysite',
     'accounts',
     'offers',
-    'family_groups'
-    
+    'family_groups',
 ]
 
 MIDDLEWARE = [
@@ -69,7 +70,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-            ],
+            ],  
+            #TODO Need to figure out why this custom template tag isn't working.
+            'libraries': {
+                'custom_tags': 'offers/templatetags.custom_tags', 
+                },  
         },
     },
 ]

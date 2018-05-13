@@ -18,12 +18,9 @@ def index(request):
     #This is a queryset that grabs all the objects from the Offer table.
     #offers = Offer.objects.all()
     
-    #TODO Alter this query so it grabs all objects from the current user's FAMILY.
     #This queryset grabs only the objects where the owner is the current user.
     current_user = request.user
     offers = Offer.objects.filter(owner=current_user)
-    
-    
     
     
     #Context is the dictionary of info that populates the offers/index template.
