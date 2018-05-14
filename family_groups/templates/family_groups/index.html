@@ -17,9 +17,13 @@
             {% for family_group in family_groups %}  
 
                 <div class="desc">{{ family_group.family_name }}</div>
-                {% for member in members %}
-                <div class="desc">{{ member.name }}</div>
-                {% endfor %}
+                {% if not members %}
+                    <p> No members yet </p>
+                {% else %}
+                    {% for member in members %}
+                        <div class="desc">{{ member.name }}</div>
+                    {% endfor %}
+                {% endif %}
                 <br>
 
             {% endfor %}
@@ -29,5 +33,3 @@
 
 
 {% endblock content %}
-
-
