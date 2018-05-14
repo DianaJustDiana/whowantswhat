@@ -55,9 +55,14 @@ def add_members(request):
 
         if form.is_valid():
              #Saving the form with commit=False generates an object called "form."
-            #form = form.save(commit=False)    
+            form = form.save(commit=False)    
             #Here's where I can add extra data and make the object belong to the family group.
-            #form.family = request.user. 
+            current_user = request.user
+            print(current_user)
+            current_family = Family.objects.get(parent=current_user)
+            print(current_family)
+            form.family = current_family
+            print(form.family)
             form = form.save()
             #After user addes new offer, redirect user to offers index page.
             return HttpResponseRedirect(reverse('offers:index'))
@@ -74,9 +79,17 @@ def index(request):
     #If current user is parent to a family group, this will gather them.
     #TODO Why is this broken? If current user is NOT a parent, this throws an error.
     list_of_family_groups = Family.objects.filter(parent=current_user)
+    #TODO Remove after testing.
+    print("NOTHING HERE")
+
     #TODO Marking this QuerySet so I can find it easily. Important part is member_set.
-    f = Family.objects.get(parent=current_user)
-    members = f.member_set.all()
+    #Adding condition so if there are no family groups the variable f never enters the picture.
+    if list_of_family_groups:
+        f = Family.objects.get(parent=current_user)
+        members = f.member_set.all()
+    #Need this because next part with context variables needs something for members.
+    else:
+        members = None
 
     #Context is the dictionary of info that populates the family_groups/index template.
     context = {
