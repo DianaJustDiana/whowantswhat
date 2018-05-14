@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #TODO Added for custom template tag. But tag isn't working.
     'mysite',
     'accounts',
     'offers',
@@ -148,8 +147,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-#TODO Not sure what this line did. Let's remove and see what happens.
-#STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+#Need this so favicon shows up.
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
 
 #After user logs in or out, let's redirect to home page.
 LOGIN_REDIRECT_URL = '/offers/'
