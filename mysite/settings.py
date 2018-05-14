@@ -73,7 +73,7 @@ TEMPLATES = [
             ],  
             #TODO Need to figure out why this custom template tag isn't working.
             'libraries': {
-                'custom_tags': 'offers/templatetags.custom_tags', 
+                'custom_tags': 'mysite.templatetags.custom_tags', 
                 },  
         },
     },
