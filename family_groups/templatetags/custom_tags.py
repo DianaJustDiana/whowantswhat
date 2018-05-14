@@ -2,9 +2,9 @@ from django import template
 register = template.Library()
 
 #from django.contrib.auth.models import User
-#from django.contrib.auth import get_user_model
-#User = get_user_model()
-from ..models import Offer, Account, Family, Member, User
+from django.contrib.auth import get_user_model
+User = get_user_model()
+from ..models import Family, Member
 
 #from accounts.models import User
 
