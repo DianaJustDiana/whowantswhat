@@ -26,15 +26,11 @@ def create_a_family(request):
             #Saving the form with commit=False generates an object called "form."
             form = form.save(commit=False)       
             #Here's where I can add extra data and make the object's parent the current user. 
-            current_user = request.user
-            #This changes boolean to True so I can use .is_parent to shield some views.
-            #TODO Ask Brian to look at this.
-            current_user.is_parent = True        
             #This makes the user creating a family group the parent of that group.
-            form.parent = current_user
+            form.parent = request.user
             #Then save again for real.
             form.save()
-            print(current_user.is_parent)
+            
             #TODO Change this so after user creates a family group, redirect user to add members form.
             return HttpResponseRedirect(reverse('family_groups:add_members'))
 
@@ -57,31 +53,33 @@ def add_members(request):
             form = form.save(commit=False)    
             #Here's where I can add extra data and make the object belong to the family group.
             current_user = request.user
-            print("This is the current user:")
-            print(current_user)
+            #print("This is the current user:")
+            #print(current_user)
             current_family = Family.objects.get(parent=current_user)
             #print("This is the current family group:")
             #print(current_family)
             test_this_member = form.name
             #Get all the members already in this family group.
             list_of_members = Family.objects.get(parent=current_user)
-            print("This is the list of members:")
-            print(list_of_members)
+            #print("This is the list of members:")
+            #print(list_of_members)
             #See if the member the current user wants to add is already in the family group.
             already_a_member = list_of_members.member_set.filter(name=test_this_member)
-            print("Checking this member:")
-            print(test_this_member)
-            print(already_a_member)
-
+            #print("Checking this member:")
+            #print(test_this_member)
+            #print(already_a_member)
+            #print("The parent of this group:")
+            #print(current_family.parent)
+            
             if already_a_member:
                 #TODO Tell user this member already is part of the family group.
                 #flash("I'm sorry, but that username is already taken.", 'error')
-                print("ALREADY A MEMBER OF THIS FAMILY GROUP")
+                #print("ALREADY A MEMBER OF THIS FAMILY GROUP")
                 return HttpResponseRedirect(reverse('family_groups:add_members'))
             else:
                 #Makes existing family group the one the new member is added to.
                 form.family = current_family
-                print(form.family)
+                #print(form.family)
                 form = form.save()
                 #After user addes new offer, redirect user to offers index page.
                 return HttpResponseRedirect(reverse('offers:index'))
@@ -108,6 +106,7 @@ def index(request):
 
     #Need this because next part with context variables needs something for members.
     else:
+        family_name = "No family group yet"
         members = None
 
     #Context is the dictionary of info that populates the family_groups/index template.

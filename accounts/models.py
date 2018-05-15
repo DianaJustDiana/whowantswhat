@@ -9,7 +9,7 @@ class User(AbstractUser):
     #name = models.CharField(blank=True, max_length=255)
     email = models.EmailField(blank=True, max_length=254, verbose_name='email address')
     #TODO Ask Brian to look at this.
-    is_parent = models.BooleanField(default=False)
+    #is_parent = models.BooleanField(default=False)
 
 
     

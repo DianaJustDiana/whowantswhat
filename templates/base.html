@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 
 {% load static %}
+{% load my_tags %}
 
 
 
@@ -44,9 +45,9 @@
 
                             <!--TODO Ask Brian to look at this.-->
                             <!--To make this work, add curly brace and percentage symbol to each side of user.is_parent.-->
+                            <!--{{ user.is_parent  }}-->
+                            <!--TAG WORKED!-->
                             <!--<p>HELLO!!  user.is_parent </p>-->
-
-                        
 
                             {% if user.is_authenticated %}
                             <li class="nav-item active">

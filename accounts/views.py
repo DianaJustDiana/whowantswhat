@@ -12,3 +12,5 @@ class SignUp(generic.CreateView):
     #Redirects user to the login page after registering. TODO Might change this later.
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
+
+

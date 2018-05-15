@@ -23,6 +23,7 @@ def index(request):
     offers = Offer.objects.filter(owner=current_user)
     
     
+    
     #Context is the dictionary of info that populates the offers/index template.
     context = {
         "title": "Stuff I'm offering",
@@ -53,6 +54,8 @@ def new_offer(request):
             form.save()
             #After user adds new offer, redirect user to offers index page.
             return HttpResponseRedirect(reverse('offers:index'))
+    current_user = request.user
+
 
     context = {'form': form}
     return render(request, 'offers/new_offer.html', context)
