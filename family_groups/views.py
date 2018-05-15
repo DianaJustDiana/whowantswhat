@@ -58,14 +58,35 @@ def add_members(request):
             form = form.save(commit=False)    
             #Here's where I can add extra data and make the object belong to the family group.
             current_user = request.user
-            print(current_user)
+            #print("This is the current user:")
+            #print(current_user)
+            #current_family = Family.objects.get(parent=current_user)
+            #print("This is the current family group:")
+            #print(current_family)
+            test_this_member = form.name
+            #TODO test this out
+            #print("This should be the current family group, too:")
+
+            #TODO Marking this QuerySet so I can find it easily. Important part is member_set.
             current_family = Family.objects.get(parent=current_user)
-            print(current_family)
-            form.family = current_family
-            print(form.family)
-            form = form.save()
-            #After user addes new offer, redirect user to offers index page.
-            return HttpResponseRedirect(reverse('offers:index'))
+            already_a_member = current_family.member_set.get(name=test_this_member)
+
+            #See if member being added in form already exists in family group.
+            if already_a_member:
+                #Tell user they already exist in family group.
+                #flash("I'm sorry, but that username is already taken.", 'error')
+                print("ALREADY A MEMBER OF THIS FAMILY GROUP")
+                #return redirect('/signup')
+
+            else:
+
+                form.family = current_family
+                print(form.family)
+                form = form.save()
+                #After user addes new offer, redirect user to offers index page.
+                return HttpResponseRedirect(reverse('offers:index'))
+            
+            #TODO end test this out
     
     context = {'form': form}
     return render(request, 'family_groups/add_members.html', context) 

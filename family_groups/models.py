@@ -23,6 +23,5 @@ class Family(models.Model):
 #A Member belongs to a Family.
 class Member(models.Model):
     family = models.ForeignKey(Family, on_delete=models.CASCADE)
-    #name = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.ForeignKey(User, on_delete=models.CASCADE)
     #TODO test this
