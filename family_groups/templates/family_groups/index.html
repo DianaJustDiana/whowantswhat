@@ -7,7 +7,7 @@
     So here it's 'offers:new_offer' instead of simply 'new_offer.
     WARNING: It's 'new_offer' in urls.py but here it needs to be 'offers:new_offer'-->
     <!--<p><a href="{% url 'offers:new_offer' %}" >Click here to add an offer</a></p> -->
-    <h1>{{ title }}</h1>
+    <h1> {{ title }}</h1>
 
 
     {% if not family_groups %}
@@ -16,7 +16,8 @@
         <ul>
             {% for family_group in family_groups %}  
 
-                <div class="desc">{{ family_group.family_name }}</div>
+                <!--<div class="desc">{{ family_group }}</div>-->
+                <div class="desc">Members:</div>
                 {% if not members %}
                     <p> No members yet </p>
                 {% else %}
