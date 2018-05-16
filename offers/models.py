@@ -64,6 +64,7 @@ class DibComment(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     offer = models.ForeignKey(Offer, on_delete=models.CASCADE)
     dib_comment_time_stamp = models.DateTimeField(auto_now_add=True)
+    comment = models.CharField(max_length=255)
 
     
  
