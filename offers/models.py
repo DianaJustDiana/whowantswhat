@@ -4,6 +4,7 @@ from django.db import models
 #Need the next two lines because my User is actually accounts.User.
 from django.contrib.auth import get_user_model
 User = get_user_model()
+from family_groups.models import Family
 
 # Create your models here.
 
@@ -17,6 +18,7 @@ class Offer(models.Model):
     #Image will be uploaded to MEDIA_ROOT/offerpics/.
     photo = models.ImageField(upload_to='offerpics/',default='images-9.jpeg')
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    family = models.ForeignKey(Family, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('-added_date',)

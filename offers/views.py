@@ -22,11 +22,11 @@ def index(request):
     current_user = request.user
     offers = Offer.objects.filter(owner=current_user)
     
-    
+    title = "Stuff I'm offering to " + current_user.family.family_name
     
     #Context is the dictionary of info that populates the offers/index template.
     context = {
-        "title": "Stuff I'm offering",
+        "title": title,
         "offers": offers,
     }
 
@@ -50,12 +50,17 @@ def new_offer(request):
             form = form.save(commit=False)       
             #Here's where I can add extra data and make the object's owner the current user. 
             form.owner = request.user
+            #Here's where I can make the object's family the current user's family.
+            form.family = request.user.family
+            print(form.family)
             #Then save again for real.
             form.save()
+            print(form.family)
             #After user adds new offer, redirect user to offers index page.
             return HttpResponseRedirect(reverse('offers:index'))
     current_user = request.user
 
-
     context = {'form': form}
     return render(request, 'offers/new_offer.html', context)
+
+

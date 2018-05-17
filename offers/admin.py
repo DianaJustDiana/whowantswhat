@@ -12,7 +12,7 @@ from family_groups.models import Family, Member
 
 
 class OfferAdmin(admin.ModelAdmin):
-    list_display = ('description', 'added_date', 'photo', 'owner', 'owner_id')
+    list_display = ('description', 'added_date', 'photo', 'owner', 'owner_id', 'family')
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username', 'email', 'id')
