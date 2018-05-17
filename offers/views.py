@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 #@login_required sends unvalidated users to url of my choosing. In this case, the home page.
 @login_required(login_url='/')
 def index(request):
-    """Home page for Mysite. Will display index of offers."""
+    """Displays index of offers created by user."""
     #This is a queryset that grabs all the objects from the Offer table.
     #offers = Offer.objects.all()
     
@@ -22,6 +22,7 @@ def index(request):
     current_user = request.user
     offers = Offer.objects.filter(owner=current_user)
     
+    #TODO This works if current user has just one family group. Might break if more than one family group.
     title = "Stuff I'm offering to " + current_user.family.family_name
     
     #Context is the dictionary of info that populates the offers/index template.
@@ -37,6 +38,8 @@ def index(request):
 #Works with POST or other (usually that means GET).
 def new_offer(request):
     """User can add a new offer."""
+    print(request.user.family)
+
     if request.method != 'POST':
         #No data submitted; create a blank form.
         form = OfferForm()
@@ -63,4 +66,22 @@ def new_offer(request):
     context = {'form': form}
     return render(request, 'offers/new_offer.html', context)
 
+@login_required(login_url='/')
+def available_to_me(request):
+    """Displays index of offers user can call dibs on."""
+    #This is a queryset that grabs all the objects from the Offer table.
+    #offers = Offer.objects.all()
+    
+    #This queryset grabs only the objects where the owner is the current user.
+    current_user = request.user
+    offers = Offer.objects.filter(family=current_user.family)
+    
+    title = "Items " + current_user.family.parent.username + " is offering me"
+    
+    #Context is the dictionary of info that populates the offers/index template.
+    context = {
+        "title": title,
+        "offers": offers,
+    }
 
+    return render(request, 'offers/index.html', context)
