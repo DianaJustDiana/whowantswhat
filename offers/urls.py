@@ -11,4 +11,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     #New_offer page for adding new offers.
     path('new_offer/', views.new_offer, name='new_offer'),
+    path('available_to_me/', views.available_to_me, name='available_to_me'),
 ]
