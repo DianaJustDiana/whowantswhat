@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 #Should be a GET request. That's the default, so no need to specify.
 #@login_required sends unvalidated users to url of my choosing. In this case, the home page.
+#TODO Need to add conditional so if there is no family, user's start screen is something else.
 @login_required(login_url='/')
 def index(request):
     """Displays index of offers created by user."""
