@@ -16,11 +16,18 @@
         <ul>
             {% for family_group in family_groups %}  
 
+
                 <!--<div class="desc">{{ family_group }}</div>-->
+                <div class="desc">Parent:</div>
+                <div class="desc">{{ parent }}</div>
+
+
+                
                 <div class="desc">Members:</div>
                 {% if not members %}
                     <p> No members yet </p>
                 {% else %}
+
                     {% for member in members %}
                         <div class="desc">{{ member.name }}</div>
                     {% endfor %}
