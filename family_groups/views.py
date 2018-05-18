@@ -12,6 +12,8 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 #@login_required sends unvalidated users to url of my choosing. In this case, the home page.    
+#TODO When the user creates a family group, the user is the parent of that group.
+#Should the user be added as a member as well?
 @login_required(login_url='/')  
 def create_a_family(request):
     """User can create a family group."""
@@ -65,13 +67,16 @@ def add_members(request):
             #print(list_of_members)
             #See if the member the current user wants to add is already in the family group.
             already_a_member = list_of_members.member_set.filter(name=test_this_member)
+
             #print("Checking this member:")
             #print(test_this_member)
             #print(already_a_member)
             #print("The parent of this group:")
             #print(current_family.parent)
             
-            if already_a_member:
+            #See if the member the current user wants to add IS the current user.
+
+            if already_a_member or current_user:
                 #TODO Tell user this member already is part of the family group.
                 #flash("I'm sorry, but that username is already taken.", 'error')
                 #print("ALREADY A MEMBER OF THIS FAMILY GROUP")
@@ -103,17 +108,20 @@ def index(request):
         f = Family.objects.get(parent=current_user)
         members = f.member_set.all()
         family_name = f.family_name
+        parent = f.parent
 
     #Need this because next part with context variables needs something for members.
     else:
         family_name = "No family group yet"
         members = None
+        parent = None
 
     #Context is the dictionary of info that populates the family_groups/index template.
     context = {
         "title": family_name,
         "family_groups": my_family_group,
         "members": members,
+        "parent": parent,
     }
 
     return render(request, 'family_groups/index.html', context)
