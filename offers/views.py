@@ -15,26 +15,15 @@ from django.contrib.auth.decorators import login_required
 #TODO Need to add conditional so if there is no family, user's start screen is something else.
 @login_required(login_url='/')
 def index(request):
-    """Displays index of offers created by user."""
-    #This is a queryset that grabs all the objects from the Offer table.
-    #offers = Offer.objects.all()
-    
-    #This queryset grabs only the objects where the owner is the current user.
+    """Displays index of offers created by user."""    
     current_user = request.user
-    ##offers = Offer.objects.filter(owner=current_user)
-    #TODO Use this later when changing template to show choice of family groups.
-    ##this_family = Family.objects.filter(parent=current_user)
-
-    ##print("This family:")
-    ##print(this_family)
-    
+    #This queryset grabs only the objects where the owner is the current user.
     offers = Offer.objects.filter(family__parent=current_user)
-    ##print(this_family)
+    print("All the offers:")
     print(offers)
 
-
     #TODO This works if current user has just one family group. Might break if more than one family group.
-    title = "Stuff I'm offering  " #+ current_user.family.family_name
+    title = "Stuff I'm offering to " + current_user.family.family_name
     
     #Context is the dictionary of info that populates the offers/index template.
     context = {
@@ -52,9 +41,8 @@ def new_offer(request):
     current_user = request.user
 
     this_family = Family.objects.get(parent=current_user)
-    print("This user's families:")
+    print("This user's family:")
     print(this_family)
-
 
     if request.method != 'POST':
         #No data submitted; create a blank form.
@@ -72,10 +60,8 @@ def new_offer(request):
             form.owner = request.user
             #Here's where I can make the object's family the current user's family.
             form.family = this_family
-            #print(form.family)
             #Then save again for real.
             form.save()
-            #print(form.family)
             #After user adds new offer, redirect user to offers index page.
             return HttpResponseRedirect(reverse('offers:index'))
     current_user = request.user
@@ -86,30 +72,21 @@ def new_offer(request):
 @login_required(login_url='/')
 def available_to_me(request):
     """Displays index of offers user can call dibs on."""
-    #This is a queryset that grabs all the objects from the Offer table.
-    #offers = Offer.objects.all()
-    
-    #This queryset grabs only the objects where the member is the current user.
     current_user = request.user
     print(current_user)
-    offers = Offer.objects.filter(family=current_user.family)
-    #offers = Offer.objects.filter(family__member=current_user)
+    #This queryset grabs only the objects where the member is the current user.
+    #It grabs family objects that have a member with name field matching current user.
+    #The double underscore is important!!
+    my_family = Family.objects.get(member__name=current_user)
+    print("My family:")
+    print(my_family)
+    #This queryset grabs all offers available to my_family.
+    offers = Offer.objects.filter(family=my_family)
+    print("My offers:")
     print(offers)
-
-
-    #offers = Offer.objects.filter(owner=current_user)
-    #TODO Use this later when changing template to show choice of family groups.
-    #this_family = Family.objects.filter(parent=current_user)
-
     
-    #offers = None
-    #offers = Offer.objects.filter(family=all_the_families)
-
-    #first_level = Family.objects.filter(member=current_user.id)
-    #second_level = Offer.objects.filter(family=first_level)
-    #offers = Offer.objects.filter(family=current_user_families)  
-    
-    title = "Items " + current_user.family.parent.username + " is offering me"
+    #TODO Make better title that includes the name of the offering parent.
+    title = "Items being offered to me" #+ current_user.family.parent.username + " is offering me"
     
     #Context is the dictionary of info that populates the offers/index template.
     context = {
