@@ -62,11 +62,11 @@ def add_members(request):
             #print(current_family)
             test_this_member = form.name
             #Get all the members already in this family group.
-            list_of_members = Family.objects.get(parent=current_user)
+            #list_of_members = Family.objects.get(parent=current_user)
             #print("This is the list of members:")
             #print(list_of_members)
             #See if the member the current user wants to add is already in the family group.
-            already_a_member = list_of_members.member_set.filter(name=test_this_member)
+            already_a_member = current_family.member_set.filter(name=test_this_member)
             
             #print("Checking this member:")
             #print(test_this_member)
@@ -75,8 +75,8 @@ def add_members(request):
             #print(current_family.parent)
             
             #See if the member the current user wants to add IS the current user.
-            
-            if already_a_member or current_user:
+            #TODO Prevent family parent from adding self as member.
+            if already_a_member:
             #TODO Tell user this member already is part of the family group.
             #flash("I'm sorry, but that username is already taken.", 'error')
             #print("ALREADY A MEMBER OF THIS FAMILY GROUP")
@@ -104,11 +104,11 @@ def index(request):
     my_family_group = Family.objects.filter(parent=current_user)
     #TODO Marking this QuerySet so I can find it easily. Important part is member_set.
     #Adding condition so if there are no family groups the variable f never enters the picture.    
-        if my_family_group:
-            f = Family.objects.get(parent=current_user)
-            members = f.member_set.all()
-            family_name = f.family_name
-            parent = f.parent
+    if my_family_group:
+        f = Family.objects.get(parent=current_user)
+        members = f.member_set.all()
+        family_name = f.family_name
+        parent = f.parent
     
     #Need this because next part with context variables needs something for members.
     else:
