@@ -48,20 +48,26 @@
                             <!--{{ user.is_parent  }}-->
                             <!--TAG WORKED!-->
                             <!--<p>HELLO!!  user.is_parent </p>-->
+                            {% if user.is_authenticated and member.family %}
+                            <li class="nav-item active">
+                                <a class="nav-link" >It worked!<span class="sr-only">(current)</span></a>
+                              </li>
+                            {% endif %}
 
-                            {% if user.is_authenticated %}
+
+                            {% if user.is_authenticated and user.family.parent%}
                             <li class="nav-item active">
                               <a class="nav-link" href="{% url 'offers:index' %}">See what I'm offering<span class="sr-only">(current)</span></a>
                             </li>
                             {% endif %}
-
-                            {% if user.is_authenticated %}
+                            <!--TODO Limit this one to users who are members of a family.-->
+                            {% if user.is_authenticated%}
                             <li class="nav-item active">
                               <a class="nav-link" href="{% url 'offers:available_to_me' %}">See items available to me<span class="sr-only">(current)</span></a>
                             </li>
                             {% endif %}
 
-                            {% if user.is_authenticated %}
+                            {% if user.is_authenticated and user.family.parent%}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'offers:new_offer' %}">Add an offer</a>
                             </li>
@@ -75,13 +81,13 @@
                             </li>
                             {% endif %}
 
-                            {% if user.is_authenticated %}
+                            {% if user.is_authenticated and user.family.parent%}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'family_groups:add_members' %}">Add someone to your family group</a>
                             </li>
                             {% endif %}
 
-                            {% if user.is_authenticated %}
+                            {% if user.is_authenticated and user.family.parent%}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'family_groups:index' %}">See my family group</a>
                             </li>
