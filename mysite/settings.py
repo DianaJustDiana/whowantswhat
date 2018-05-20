@@ -152,6 +152,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 
 #After user logs in or out, let's redirect to home page.
+#TODO If current user isn't part of a family, redirect home.
 LOGIN_REDIRECT_URL = '/offers/'
 LOGOUT_REDIRECT_URL = 'home'
 
