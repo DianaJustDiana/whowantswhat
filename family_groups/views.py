@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.urls import reverse
+#from django.http import HttpResponseRedirect
+#from django.urls import reverse
+from django.shortcuts import redirect
+
 
 from .forms import CreateAFamilyForm, AddMembersForm
 
@@ -34,7 +36,8 @@ def create_a_family(request):
             form.save()
             
             #TODO Change this so after user creates a family group, redirect user to add members form.
-            return HttpResponseRedirect(reverse('family_groups:add_members'))
+            #return HttpResponseRedirect(reverse('family_groups:add_members'))
+            return redirect('family_groups:add_members')
 
     context = {'form': form}
     return render(request, 'family_groups/create_a_family.html', context) 
@@ -80,14 +83,16 @@ def add_members(request):
             #TODO Tell user this member already is part of the family group.
             #flash("I'm sorry, but that username is already taken.", 'error')
             #print("ALREADY A MEMBER OF THIS FAMILY GROUP")
-                return HttpResponseRedirect(reverse('family_groups:add_members'))
+                #return HttpResponseRedirect(reverse('family_groups:add_members'))
+                return redirect('family_groups:add_members')
             else:
                 #Makes existing family group the one the new member is added to.
                 form.family = current_family
                 #print(form.family)
                 form = form.save()
                 #After user addes new offer, redirect user to offers index page.
-                return HttpResponseRedirect(reverse('offers:index'))
+                #return HttpResponseRedirect(reverse('offers:index'))
+                return redirect('offers:index')
 
             #TODO end test this out
     context = {'form': form}

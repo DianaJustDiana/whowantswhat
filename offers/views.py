@@ -1,7 +1,9 @@
 from django.shortcuts import render
 #Need for new_offer redirect.
-from django.http import HttpResponseRedirect
-from django.urls import reverse
+#from django.http import HttpResponseRedirect
+#from django.urls import reverse
+from django.shortcuts import redirect
+
 
 from .models import Offer, User, Family
 from .forms import OfferForm
@@ -63,7 +65,9 @@ def new_offer(request):
             #Then save again for real.
             form.save()
             #After user adds new offer, redirect user to offers index page.
-            return HttpResponseRedirect(reverse('offers:index'))
+            #return HttpResponseRedirect(reverse('offers:index'))
+            return redirect('offers:index')
+            
     current_user = request.user
 
     context = {'form': form}
