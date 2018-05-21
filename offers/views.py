@@ -81,11 +81,21 @@ def available_to_me(request):
     #This queryset grabs only the objects where the member is the current user.
     #It grabs family objects that have a member with name field matching current user.
     #The double underscore is important!!
-    my_family = Family.objects.get(member__name=current_user)
-    print("My family:")
-    print(my_family)
-    #This queryset grabs all offers available to my_family.
-    offers = Offer.objects.filter(family=my_family)
+    my_family_groups = Family.objects.filter(member__name=current_user)
+    print("User's family groups:")
+    print(my_family_groups)
+
+    #For testing:
+    for each in my_family_groups:
+        print("My family:")
+        print(each)
+    #This queryset grabs all offers available to each my_family. User might have more than one.
+    offers = []
+    for each in my_family_groups:
+        offers += Offer.objects.filter(family=each)
+    #offers = Offers.objects.filter(family=each)
+
+    #For testing:
     print("My offers:")
     print(offers)
     
@@ -96,6 +106,7 @@ def available_to_me(request):
     context = {
         "title": title,
         "offers": offers,
+        "my_family_groups": my_family_groups
     }
 
     return render(request, 'offers/index.html', context)
