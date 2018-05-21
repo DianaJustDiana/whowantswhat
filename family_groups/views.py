@@ -70,7 +70,6 @@ def add_members(request):
             #print(list_of_members)
             #See if the member the current user wants to add is already in the family group.
             already_a_member = current_family.member_set.filter(name=test_this_member)
-            
             #print("Checking this member:")
             #print(test_this_member)
             #print(already_a_member)
@@ -79,7 +78,7 @@ def add_members(request):
             
             #See if the member the current user wants to add IS the current user.
             #TODO Prevent family parent from adding self as member.
-            if already_a_member:
+            if already_a_member or (test_this_member == current_user):
             #TODO Tell user this member already is part of the family group.
             #flash("I'm sorry, but that username is already taken.", 'error')
             #print("ALREADY A MEMBER OF THIS FAMILY GROUP")
