@@ -91,7 +91,8 @@ def available_to_me(request):
         print("My family:")
         print(each)
     #This queryset grabs all offers available to each my_family. User might have more than one.
-    offers = []
+    offers = []    
+
     for each in my_family_groups:
         offers += Offer.objects.filter(family=each)
     #offers = Offers.objects.filter(family=each)
@@ -99,7 +100,10 @@ def available_to_me(request):
     #For testing:
     print("My offers:")
     print(offers)
-    
+    #dibs = Offer.objects.filter(dib__owner=current_user)
+    dibs = Dib.objects.all()
+    print("All the dibs:")
+    print(dibs)
     #TODO Make better title that includes the name of the offering parent.
     title = "Items being offered to me" #+ current_user.family.parent.username + " is offering me"
     
@@ -107,7 +111,9 @@ def available_to_me(request):
     context = {
         "title": title,
         "offers": offers,
-        "my_family_groups": my_family_groups
+        "my_family_groups": my_family_groups,
+        "dibs": dibs,
+        "current_user": current_user,
     }
 
     return render(request, 'offers/index.html', context)
@@ -119,6 +125,8 @@ def add_dib(request):
     current_user = request.user
     print("The current user:")
     print(current_user)
+    print("The current user's ID:")
+    print(current_user.id)
 
 
     if request.method != 'POST':
@@ -127,25 +135,26 @@ def add_dib(request):
     else:
         #POST data submitted; process data.
         form = DibForm(request.POST)
+        print(form)
 
         if form.is_valid():
-            print("The dib form worked!")
+
             #Saving the form with commit=False generates an object called "form."
             form = form.save(commit=False)       
             #Here's where I can add extra data and make the object's owner the current user. 
-            form.owner = request.user
+            form.owner = current_user
             print("The dib owner:")
             print(form.owner)
             #Here's where I can make the dib associated with the current offer.
-            form.offer = offer_id
+            #form.offer = offer.id
             print("The current offer:")
-            print(offer_id)
-            print(offer.description)
             #Then save again for real.
             form.save()
             #After user adds new offer, redirect user to offers index page.
             #return HttpResponseRedirect(reverse('offers:index'))
-            return redirect('offers:index')
+            return redirect('offers:available_to_me')
+        else:
+            print("The form is not valid.")
             
     context = {'form': form}
     return render(request, 'offers/index.html', context)

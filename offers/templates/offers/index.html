@@ -20,17 +20,22 @@
     <div class="gallery">
         <img src="/media/{{ offer.photo }}" alt="TODO" width="300">
         <div class="desc">{{ offer.description }}</div>
+
         <!--if not user.family.parent -->
+        <!-- if not dibs -->
         <form action="{% url 'offers:add_dib' %}" method='post'>
             <!--For security.-->
             {% csrf_token %}
-            <input type="hidden" name="offer" value="{{offer.id}}" />
-            <input type="hidden" name="owner" value="{{owner.id}}" />
 
+            <input type="hidden" name="offer" value="{{offer.id}}" />
             <input type="submit" value="I call dibs!" />
         </form>
         <!-- endif -->
+        <!-- else -->
+        <div class="desc">{{ offer.dib.owner }} calls dibs!</div>
+        <!-- endif -->
     </div>
+
 
     {% endfor %}
 </ul>
