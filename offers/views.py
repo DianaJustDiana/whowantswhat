@@ -5,8 +5,8 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 
 
-from .models import Offer, User, Family
-from .forms import OfferForm
+from .models import Offer, User, Family, Dib
+from .forms import OfferForm, DibForm
 
 #Need for @login required decorator.
 from django.contrib.auth.decorators import login_required
@@ -109,4 +109,37 @@ def available_to_me(request):
         "my_family_groups": my_family_groups
     }
 
+    return render(request, 'offers/index.html', context)
+
+
+@login_required(login_url='/')
+def add_dib(request):
+    """Displays index of offers user can call dibs on."""
+    current_user = request.user
+    print("The current user:")
+    print(current_user)
+
+
+    if request.method != 'POST':
+        #No data submitted; create a blank form.
+        form = DibForm()
+    else:
+        #POST data submitted; process data.
+        form = DibForm(request.POST)
+
+        if form.is_valid():
+            
+            #Saving the form with commit=False generates an object called "form."
+            form = form.save(commit=False)       
+            #Here's where I can add extra data and make the object's owner the current user. 
+            form.owner = request.user
+            #Here's where I can make the object's family the current user's family.
+            form.offer = offer_id
+            #Then save again for real.
+            form.save()
+            #After user adds new offer, redirect user to offers index page.
+            #return HttpResponseRedirect(reverse('offers:index'))
+            return redirect('offers:index')
+            
+    context = {'form': form}
     return render(request, 'offers/index.html', context)

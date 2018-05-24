@@ -1,5 +1,5 @@
 from django import forms
-from .models import Offer
+from .models import Offer, Dib
 
 class OfferForm(forms.ModelForm):
 
@@ -7,3 +7,9 @@ class OfferForm(forms.ModelForm):
         model = Offer
         fields = ['description', 'photo']
         labels = {'description' : 'A brief description', 'photo': 'Add your photo'}
+
+class DibForm(forms.ModelForm):
+
+    class Meta:
+        model = Dib
+        fields = ['owner', 'offer']

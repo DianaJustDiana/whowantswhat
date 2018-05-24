@@ -1,47 +1,41 @@
-{% extends 'base.html' %}
-
-{% block content %}
-    <!--Hi, {{ user.username }}!-->
-    <!--<p><a href="{% url 'logout' %}">Click here to log out</a></p> 
+{% extends 'base.html' %} {% block content %}
+<!--Hi, {{ user.username }}!-->
+<!--<p><a href="{% url 'logout' %}">Click here to log out</a></p> 
     <p><a href="{% url 'home' %}">Click here to return to the home page</a></p>
     -->
-    <br>
-    <!--To make this href work, need to add namespace: to it. 
+<br>
+<!--To make this href work, need to add namespace: to it. 
     So here it's 'offers:new_offer' instead of simply 'new_offer.
     WARNING: It's 'new_offer' in urls.py but here it needs to be 'offers:new_offer'-->
-    <!--<p><a href="{% url 'offers:new_offer' %}" >Click here to add an offer</a></p> -->
-    <h1>{{ title }}</h1>
+<!--<p><a href="{% url 'offers:new_offer' %}" >Click here to add an offer</a></p> -->
+<h1>{{ title }}</h1>
 
-    <!--testing some stuff here
-    <h3>{{current_user}}</h3>    
-    end testing-->
+{% if not offers %}
+<p>Nothing yet</p>
+{% else %}
 
-    {% if not offers %}
-        <p>Nothing yet</p>
-    {% else %}
-    
+<ul>
+    {% for offer in offers %}
 
-        <ul>
-            {% for offer in offers %}
-            
-                <!--{{ offer.description }}-->
-                
-                
-                 <!-- <img src="{{ offer.photo }}"></a>               -->
-                
-                
-                 <div class="gallery">
-                          <img src="/media/{{ offer.photo }}" alt="TODO" width="300" >
-                        </a>
-                        <div class="desc">{{ offer.description }}</div>
-                      </div>
-              <!--<img src="/media/{{ offer.photo }}"> -->
-            {% endfor %}
-        </ul>
+    <div class="gallery">
+        <img src="/media/{{ offer.photo }}" alt="TODO" width="300">
+        <div class="desc">{{ offer.description }}</div>
+        <!--if not user.family.parent -->
+        <form action="{% url 'offers:add_dib' %}" method='post'>
+            <!--For security.-->
+            {% csrf_token %}
+            <input type="hidden" name="offer" value="{{offer.id}}" />
+            <input type="hidden" name="owner" value="{{owner.id}}" />
 
-    {% endif %}
+            <input type="submit" value="I call dibs!" />
+        </form>
+        <!-- endif -->
+    </div>
 
 
-{% endblock content %}
 
 
+    {% endfor %}
+</ul>
+
+{% endif %} {% endblock content %}
