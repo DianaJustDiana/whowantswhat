@@ -41,7 +41,8 @@ def index(request):
 def new_offer(request):
     """User can add a new offer."""
     current_user = request.user
-
+    print("First time:")
+    print(current_user)
     this_family = Family.objects.get(parent=current_user)
     print("This user's family:")
     print(this_family)
@@ -67,8 +68,8 @@ def new_offer(request):
             #After user adds new offer, redirect user to offers index page.
             #return HttpResponseRedirect(reverse('offers:index'))
             return redirect('offers:index')
-            
-    current_user = request.user
+    print("Second time:")
+    print(current_user)        
 
     context = {'form': form}
     return render(request, 'offers/new_offer.html', context)
@@ -128,13 +129,18 @@ def add_dib(request):
         form = DibForm(request.POST)
 
         if form.is_valid():
-            
+            print("The dib form worked!")
             #Saving the form with commit=False generates an object called "form."
             form = form.save(commit=False)       
             #Here's where I can add extra data and make the object's owner the current user. 
             form.owner = request.user
-            #Here's where I can make the object's family the current user's family.
+            print("The dib owner:")
+            print(form.owner)
+            #Here's where I can make the dib associated with the current offer.
             form.offer = offer_id
+            print("The current offer:")
+            print(offer_id)
+            print(offer.description)
             #Then save again for real.
             form.save()
             #After user adds new offer, redirect user to offers index page.
