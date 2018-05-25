@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>{{ title }}</h1>
+{% if not my_dibs %}
+<p>Nothing yet</p>
+{% else %}
+
+<ul>
+    {% for each in my_dibs %}
+    <div class="gallery">
+        <img src="/media/{{ each.photo }}" alt="TODO" width="300">
+        <div class="desc">{{ each.description }}</div>
+        {% endfor %} {% endif %} {% endblock content %}
