@@ -100,10 +100,16 @@ def available_to_me(request):
     #For testing:
     print("My offers:")
     print(offers)
+
+#Try some dibs stuff here
     #dibs = Offer.objects.filter(dib__owner=current_user)
-    dibs = Dib.objects.all()
-    print("All the dibs:")
-    print(dibs)
+    #dibs = []
+    #for each in offers:
+    #    dibs += Dib.objects.filter(offer=each)
+    #dibs = Dib.objects.all()   
+    #print("All the dibs:")
+    #print(dibs)
+
     #TODO Make better title that includes the name of the offering parent.
     title = "Items being offered to me" #+ current_user.family.parent.username + " is offering me"
     
@@ -112,12 +118,15 @@ def available_to_me(request):
         "title": title,
         "offers": offers,
         "my_family_groups": my_family_groups,
-        "dibs": dibs,
+        #"dibs": dibs,
         "current_user": current_user,
     }
 
     return render(request, 'offers/index.html', context)
 
+def has_some_dibs(offer):
+    if dib:
+        return dib.owner
 
 @login_required(login_url='/')
 def add_dib(request):
@@ -158,3 +167,37 @@ def add_dib(request):
             
     context = {'form': form}
     return render(request, 'offers/index.html', context)
+
+
+
+@login_required(login_url='/')
+def all_my_dibs(request):
+    current_user = request.user
+    
+    
+    #my_dibs = Offer.objects.raw('SELECT * FROM offers_dib WHERE owner_id = %s', [current_user])
+    #print("The current user:")
+    #print(current_user)
+    #print("The current user's dibs:")
+    #print(my_dibs)
+
+
+
+    my_dibs = Offer.objects.filter(dib__owner=current_user).values('description', 'photo', 'dib')
+    print("Everything in my_dibs:")
+    print(my_dibs)
+
+    
+    
+    
+    
+
+    title = "Items I've called dibs on" #+ current_user.family.parent.username + " is offering me"
+    
+    #Context is the dictionary of info that populates the offers/index template.
+    context = {
+        "title": title,
+        "my_dibs": my_dibs,
+    }
+
+    return render(request, 'offers/all_my_dibs.html', context)
