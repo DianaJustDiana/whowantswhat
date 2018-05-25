@@ -20,6 +20,8 @@
     <div class="gallery">
         <img src="/media/{{ offer.photo }}" alt="TODO" width="300">
         <div class="desc">{{ offer.description }}</div>
+        <div class="desc">{{ offer.has_some_dibs }}</div>
+
 
         <!--if not user.family.parent -->
         <!-- if not dibs -->
@@ -32,8 +34,10 @@
         </form>
         <!-- endif -->
         <!-- else -->
+        {% if offer.family.dib %}
         <div class="desc">{{ offer.dib.owner }} calls dibs!</div>
         <!-- endif -->
+        {% endif %}
     </div>
 
 
