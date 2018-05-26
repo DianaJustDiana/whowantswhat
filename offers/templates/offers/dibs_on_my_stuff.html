@@ -4,17 +4,10 @@
 {% if not my_dibs %}
 <p>Nothing yet</p>
 {% else %}
-
 <ul>
-    {% for each in my_dibs %}
+    {% for each in my_dibs %} {% if each.dib %}
     <div class="gallery">
         <img src="/media/{{ each.photo }}" alt="TODO" width="300">
         <div class="desc">{{ each.description }}</div>
-        <div class="desc">{{ each.owner }}</div>
-
-
-        {% endfor %} {% endif %} {% endblock content %}
-
-
-
-        
+        <div class="desc">{{ each.dib.owner }}</div>
+        {% endif %} {% endfor %} {% endif %} {% endblock content %}

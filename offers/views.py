@@ -193,17 +193,7 @@ def dibs_on_my_stuff(request):
   
     current_user = request.user
 
-        
-    #offers_in_my_family = Offer.objects.filter(family__parent=current_user)
-
-    #my_dibs = Offer.objects.filter(owner=current_user).values('description', 'photo')
-    #offers where dib owner is member of current user's family
     my_dibs = Offer.objects.filter(family__parent=current_user).values('dib', 'description', 'photo')
-    #print("All my offers") 
-    #print(my_offers)
-    #my_dibs = my_offers.objects.filter(di)
-    
-
 
     title = "My items that people have called dibs on" #+ current_user.family.parent.username + " is offering me"
     
