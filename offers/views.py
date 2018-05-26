@@ -20,7 +20,9 @@ def index(request):
     """Displays index of offers created by user."""    
     current_user = request.user
     #This queryset grabs only the objects where the owner is the current user.
-    offers = Offer.objects.filter(family__parent=current_user)
+    offers = Offer.objects.filter(family__parent=current_user).values('dib', 'description', 'photo')
+
+    
     print("All the offers:")
     print(offers)
 
@@ -83,6 +85,7 @@ def available_to_me(request):
     #It grabs family objects that have a member with name field matching current user.
     #The double underscore is important!!
     my_family_groups = Family.objects.filter(member__name=current_user)
+    
     print("User's family groups:")
     print(my_family_groups)
 
@@ -94,21 +97,12 @@ def available_to_me(request):
     offers = []    
 
     for each in my_family_groups:
-        offers += Offer.objects.filter(family=each)
-    #offers = Offers.objects.filter(family=each)
-
+        offers += Offer.objects.filter(family=each).values('dib', 'description', 'photo')
+    
     #For testing:
     print("My offers:")
     print(offers)
 
-#Try some dibs stuff here
-    #dibs = Offer.objects.filter(dib__owner=current_user)
-    #dibs = []
-    #for each in offers:
-    #    dibs += Dib.objects.filter(offer=each)
-    #dibs = Dib.objects.all()   
-    #print("All the dibs:")
-    #print(dibs)
 
     #TODO Make better title that includes the name of the offering parent.
     title = "Items being offered to me" #+ current_user.family.parent.username + " is offering me"
