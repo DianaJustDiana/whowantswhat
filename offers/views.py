@@ -168,29 +168,14 @@ def add_dib(request):
     context = {'form': form}
     return render(request, 'offers/index.html', context)
 
-
-
 @login_required(login_url='/')
 def all_my_dibs(request):
+  
     current_user = request.user
-    
-    
-    #my_dibs = Offer.objects.raw('SELECT * FROM offers_dib WHERE owner_id = %s', [current_user])
-    #print("The current user:")
-    #print(current_user)
-    #print("The current user's dibs:")
-    #print(my_dibs)
-
-
-
-    my_dibs = Offer.objects.filter(dib__owner=current_user).values('description', 'photo', 'dib')
-    print("Everything in my_dibs:")
+  
+    my_dibs = Offer.objects.filter(dib__owner=current_user).values('description', 'photo')
+    print("Stuff I've called dibs on:")
     print(my_dibs)
-
-    
-    
-    
-    
 
     title = "Items I've called dibs on" #+ current_user.family.parent.username + " is offering me"
     
@@ -201,3 +186,34 @@ def all_my_dibs(request):
     }
 
     return render(request, 'offers/all_my_dibs.html', context)
+
+
+@login_required(login_url='/')
+def dibs_on_my_stuff(request):
+  
+    current_user = request.user
+
+        
+    #offers_in_my_family = Offer.objects.filter(family__parent=current_user)
+
+    #my_dibs = Offer.objects.filter(owner=current_user).values('description', 'photo')
+    #offers where dib owner is member of current user's family
+    my_dibs = Offer.objects.filter(family__parent=current_user).values('dib', 'description', 'photo')
+    #print("All my offers") 
+    #print(my_offers)
+    #my_dibs = my_offers.objects.filter(di)
+    
+
+
+    title = "My items that people have called dibs on" #+ current_user.family.parent.username + " is offering me"
+    
+    #Context is the dictionary of info that populates the offers/index template.
+    context = {
+        "title": title,
+        "my_dibs": my_dibs,
+    }
+
+    return render(request, 'offers/dibs_on_my_stuff.html', context)
+         
+         
+
