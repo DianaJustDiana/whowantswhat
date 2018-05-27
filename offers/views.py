@@ -20,8 +20,9 @@ def index(request):
     """Displays index of offers created by user."""    
     current_user = request.user
     #This queryset grabs only the objects where the owner is the current user.
-    offers = Offer.objects.filter(family__parent=current_user).values('dib', 'description', 'photo')
+    offers = Offer.objects.filter(family__parent=current_user)#.values('dib', 'description', 'photo')
 
+    
     
     print("All the offers:")
     print(offers)
@@ -95,9 +96,9 @@ def available_to_me(request):
         print(each)
     #This queryset grabs all offers available to each my_family. User might have more than one.
     offers = []    
-
     for each in my_family_groups:
-        offers += Offer.objects.filter(family=each).values('dib', 'description', 'photo')
+        offers += Offer.objects.filter(family=each)#.values('dib', 'description', 'photo')
+    
     
     #For testing:
     print("My offers:")
@@ -118,20 +119,12 @@ def available_to_me(request):
 
     return render(request, 'offers/index.html', context)
 
-def has_some_dibs(offer):
-    if dib:
-        return dib.owner
 
 @login_required(login_url='/')
 def add_dib(request):
     """Displays index of offers user can call dibs on."""
     current_user = request.user
-    print("The current user:")
-    print(current_user)
-    print("The current user's ID:")
-    print(current_user.id)
-
-
+    
     if request.method != 'POST':
         #No data submitted; create a blank form.
         form = DibForm()
@@ -186,8 +179,17 @@ def all_my_dibs(request):
 def dibs_on_my_stuff(request):
   
     current_user = request.user
+    current_family = Family.objects.get(parent=current_user)
+    #print("The current family:")
+    #print(current_family)
 
-    my_dibs = Offer.objects.filter(family__parent=current_user).values('dib', 'description', 'photo')
+    my_dibs = Dib.objects.filter(offer__family=current_family)
+
+    #print("My dibs:")
+    #print(my_dibs)
+    #for each in my_dibs:
+    #    print(each.owner)
+    #    print(each.offer)
 
     title = "My items that people have called dibs on" #+ current_user.family.parent.username + " is offering me"
     
@@ -199,5 +201,5 @@ def dibs_on_my_stuff(request):
 
     return render(request, 'offers/dibs_on_my_stuff.html', context)
          
-         
+
 

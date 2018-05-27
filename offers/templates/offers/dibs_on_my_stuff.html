@@ -5,9 +5,9 @@
 <p>Nothing yet</p>
 {% else %}
 <ul>
-    {% for each in my_dibs %} {% if each.dib %}
+    {% for each in my_dibs %}
     <div class="gallery">
-        <img src="/media/{{ each.photo }}" alt="TODO" width="300">
-        <div class="desc">{{ each.description }}</div>
-        <div class="desc">{{ each.dib }}</div>
-        {% endif %} {% endfor %} {% endif %} {% endblock content %}
+        <img src="/media/{{ each.offer.photo }}" alt="TODO" width="300">
+        <div class="desc">{{ each.offer.description }}</div>
+        <div class="desc">{{ each.owner }} called dibs!</div>
+        {% endfor %} {% endif %} {% endblock content %}

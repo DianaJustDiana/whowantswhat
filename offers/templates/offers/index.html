@@ -20,9 +20,7 @@
     <div class="gallery">
         <img src="/media/{{ offer.photo }}" alt="TODO" width="300">
         <div class="desc">{{ offer.description }}</div>
-        {% if offer.dib %}
         <div class="desc">{{ offer.dib }} calls dibs!</div>
-        {% endif %}
 
 
 
@@ -31,6 +29,7 @@
             {% csrf_token %}
 
             <input type="hidden" name="offer" value="{{offer.id}}" />
+
             <input type="submit" value="I call dibs!" />
         </form>
 
