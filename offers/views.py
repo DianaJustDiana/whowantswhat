@@ -34,6 +34,7 @@ def index(request):
     context = {
         "title": title,
         "offers": offers,
+        "current_user": current_user,
     }
 
     return render(request, 'offers/index.html', context)
@@ -103,6 +104,7 @@ def available_to_me(request):
     #For testing:
     print("My offers:")
     print(offers)
+    
 
 
     #TODO Make better title that includes the name of the offering parent.
@@ -141,14 +143,23 @@ def add_dib(request):
             form.owner = current_user
             print("The dib owner:")
             print(form.owner)
+            print("the owner of this offer:")
+            print(form.offer.owner)
+            
+            #Already hid the dib button in cases where the current user is the offer owner. But just in case,
+            #Let's add conditional here to prevent current user from calling dibs on own stuff.
+            if form.offer.owner == form.owner:
+                
+                return redirect('offers:available_to_me')
             #Here's where I can make the dib associated with the current offer.
             #form.offer = offer.id
-            print("The current offer:")
+            #print("The current offer:")
             #Then save again for real.
-            form.save()
-            #After user adds new offer, redirect user to offers index page.
-            #return HttpResponseRedirect(reverse('offers:index'))
-            return redirect('offers:available_to_me')
+            else:
+                form.save()
+                #After user adds new offer, redirect user to offers index page.
+                #return HttpResponseRedirect(reverse('offers:index'))
+                return redirect('offers:available_to_me')
         else:
             print("The form is not valid.")
             
@@ -160,7 +171,7 @@ def all_my_dibs(request):
   
     current_user = request.user
   
-    my_dibs = Offer.objects.filter(dib__owner=current_user).values('description', 'photo')
+    my_dibs = Offer.objects.filter(dib__owner=current_user)#.values('description', 'photo')
     print("Stuff I've called dibs on:")
     print(my_dibs)
 
@@ -184,7 +195,6 @@ def dibs_on_my_stuff(request):
     #print(current_family)
 
     my_dibs = Dib.objects.filter(offer__family=current_family)
-
     #print("My dibs:")
     #print(my_dibs)
     #for each in my_dibs:
