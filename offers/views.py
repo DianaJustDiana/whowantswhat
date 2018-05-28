@@ -20,12 +20,16 @@ def index(request):
     """Displays index of offers created by user."""    
     current_user = request.user
     #This queryset grabs only the objects where the owner is the current user.
-    offers = Offer.objects.filter(family__parent=current_user)#.values('dib', 'description', 'photo')
+    offers = Offer.objects.filter(family__parent=current_user).values('dib__owner__username', 'description', 'photo')
 
-    
-    
     print("All the offers:")
     print(offers)
+
+
+
+##SELECT Offers_Offer.description, Offers_Offer.photo, Offers_Dib.owner_id, Offers_Dib.id
+##FROM Offers_Offer
+##INNER JOIN Offers_Dib ON Offers_Offer.ID=Offers_Dib.Offer_ID
 
     #TODO This works if current user has just one family group. Might break if more than one family group.
     title = "Stuff I'm offering to " + current_user.family.family_name
@@ -83,22 +87,26 @@ def available_to_me(request):
     """Displays index of offers user can call dibs on."""
     current_user = request.user
     print(current_user)
+
+
+    offers = Offer.objects.filter(family__member__name=current_user).values('dib__owner__username', 'description', 'photo', 'owner__username', 'owner__family__family_name')
+
     #This queryset grabs only the objects where the member is the current user.
     #It grabs family objects that have a member with name field matching current user.
     #The double underscore is important!!
-    my_family_groups = Family.objects.filter(member__name=current_user)
+    ##my_family_groups = Family.objects.filter(member__name=current_user)
     
-    print("User's family groups:")
-    print(my_family_groups)
+    ##print("User's family groups:")
+    ##print(my_family_groups)
 
     #For testing:
-    for each in my_family_groups:
-        print("My family:")
-        print(each)
+    ##for each in my_family_groups:
+    ##    print("My family:")
+    ##    print(each)
     #This queryset grabs all offers available to each my_family. User might have more than one.
-    offers = []    
-    for each in my_family_groups:
-        offers += Offer.objects.filter(family=each)#.values('dib', 'description', 'photo')
+    ##offers = []    
+    ##for each in my_family_groups:
+    ##    offers += Offer.objects.filter(family=each)#.values('dib', 'description', 'photo')
     
     
     #For testing:
@@ -114,12 +122,12 @@ def available_to_me(request):
     context = {
         "title": title,
         "offers": offers,
-        "my_family_groups": my_family_groups,
+        ##"my_family_groups": my_family_groups,
         #"dibs": dibs,
         "current_user": current_user,
     }
 
-    return render(request, 'offers/index.html', context)
+    return render(request, 'offers/available_to_me.html', context)
 
 
 @login_required(login_url='/')

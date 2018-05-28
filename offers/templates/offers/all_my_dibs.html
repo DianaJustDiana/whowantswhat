@@ -10,7 +10,8 @@
     <div class="gallery">
         <img src="/media/{{ each.photo }}" alt="TODO" width="300">
         <div class="desc">{{ each.description }}</div>
-        <div class="desc">{{ each.family }}</div>
-        <div class="desc">{{ each.owner }}</div>
+        <div class="desc">Offered by {{ each.owner.username }}</div>
+
+        <div class="desc">To members of {{ each.family }}</div>
 
         {% endfor %} {% endif %} {% endblock content %}

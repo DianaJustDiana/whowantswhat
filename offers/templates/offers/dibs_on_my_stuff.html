@@ -9,5 +9,5 @@
     <div class="gallery">
         <img src="/media/{{ each.offer.photo }}" alt="TODO" width="300">
         <div class="desc">{{ each.offer.description }}</div>
-        <div class="desc">{{ each.owner }} called dibs!</div>
+        <div class="desc">{{ each.owner.username }} called dibs!</div>
         {% endfor %} {% endif %} {% endblock content %}
