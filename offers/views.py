@@ -152,7 +152,14 @@ def all_my_dibs(request):
 def dibs_on_my_stuff(request):
   
     current_user = request.user
-    offers = Offer.objects.filter(family__parent=current_user)  
+    #TODO Is there a better way to filter this?
+    #This long, weird filter gathers offers that contain dibs owned by child members of the current user's family.
+    #Need to call distinct() on it so offers with multiple dibs appear only once.
+    offers = Offer.objects.filter(dib__owner__member__family__parent=current_user).distinct()
+
+    print("all the offers")
+    print(offers)
+
     title = "My items that people have called dibs on"
     
     #Context is the dictionary of info that populates the offers/index template.
@@ -162,6 +169,15 @@ def dibs_on_my_stuff(request):
     }
 
     return render(request, 'offers/dibs_on_my_stuff.html', context)
+
+
+##
+##     current_user_called_these_dibs = Offer.objects.filter(dib__owner=current_user)
+##            print("Test me")
+##            print(current_user_called_these_dibs)
+##            #This checks if dib the current user is trying to add already exists in set of user's dib objects.
+##            already_called_dibs_on_this = form.offer in current_user_called_these_dibs            
+            
          
 
 
