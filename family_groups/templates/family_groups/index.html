@@ -1,43 +1,33 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
 
-{% block content %}
-    
-    <br>
-    <!--To make this href work, need to add namespace: to it. 
+<br>
+<!--To make this href work, need to add namespace: to it. 
     So here it's 'offers:new_offer' instead of simply 'new_offer.
     WARNING: It's 'new_offer' in urls.py but here it needs to be 'offers:new_offer'-->
-    <!--<p><a href="{% url 'offers:new_offer' %}" >Click here to add an offer</a></p> -->
-    <h1> {{ title }}</h1>
+<!--<p><a href="{% url 'offers:new_offer' %}" >Click here to add an offer</a></p> -->
+<h1> {{ title }}</h1>
 
 
-    {% if not family_groups %}
-        <p>But feel free to create one!</p>
-    {% else %}
-        <ul>
-            {% for family_group in family_groups %}  
+{% if not family_groups %}
+<p>But feel free to create one!</p>
+{% else %}
+<ul>
+    {% for family_group in family_groups %}
 
 
-                <!--<div class="desc">{{ family_group }}</div>-->
-                <div class="desc">Parent:</div>
-                <div class="desc">{{ parent }}</div>
+    <!--<div class="desc">{{ family_group }}</div>-->
+    <div class="desc">Parent:</div>
+    <div class="desc">{{ parent.username }}</div>
+    <div class="desc">{{ parent }}</div>
+    <br>
+    <div class="desc">Members:</div>
+    {% if not members %}
+    <p> No members yet </p>
+    {% else %} {% for member in members %}
+    <div class="desc">{{ member.name.username }}</div>
+    <div class="desc">{{ member.name}}</div>
+    <br> {% endfor %} {% endif %}
+    <br> {% endfor %}
+</ul>
 
-
-                
-                <div class="desc">Members:</div>
-                {% if not members %}
-                    <p> No members yet </p>
-                {% else %}
-
-                    {% for member in members %}
-                        <div class="desc">{{ member.name }}</div>
-                    {% endfor %}
-                {% endif %}
-                <br>
-
-            {% endfor %}
-        </ul>
-
-    {% endif %}
-
-
-{% endblock content %}
+{% endif %} {% endblock content %}

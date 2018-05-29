@@ -1,16 +1,13 @@
-
-{% extends 'base.html' %}
-
-{% block content %}
+ {% extends 'base.html' %} {% block content %}
 
 <p>Create a family group:</p>
 <!--<form action=/offers/new_offer/ -->
-    <!--The above works fine as well.-->
-    <form action="{% url 'family_groups:create_a_family' %}" method='post'>
-        <!--For security.-->
-        {% csrf_token %}
-        <!--Renders form elements inside paragraph tags.-->
-        {{ form.as_p}}
-        <button name="submit">Create my family</button>
-    </form>
+<!--The above works fine as well.-->
+<form action="{% url 'family_groups:create_a_family' %}" method='post'>
+    <!--For security.-->
+    {% csrf_token %}
+    <!--Renders form elements inside paragraph tags.-->
+    {{ form.as_p}}
+    <button name="submit">Create my family</button>
+</form>
 {% endblock content %}

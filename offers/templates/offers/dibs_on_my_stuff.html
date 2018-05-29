@@ -7,7 +7,7 @@
 {% else %}
 <ul>
     <!--TODO Make this work! Need to filter out offers that have no dibs.-->
-    {% for offer in offers %} {% if offer.dib_set != None %}
+    {% for offer in offers %}
 
     <div class="gallery">
         <img src="/media/{{ offer.photo }}" alt="TODO" width="300">
@@ -16,4 +16,4 @@
         <!--To access the attributes of a dib, use dib_set.-->
         {% for each in offer.dib_set.all %}
         <div class="desc">{{ each.owner.username }} called dibs!</div>
-        {% endfor %} {% endif %} {% endfor %} {% endif %} {% endblock content %}
+        {% endfor %} {% endfor %} {% endif %} {% endblock content %}

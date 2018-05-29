@@ -22,9 +22,7 @@ def index(request):
 
     #This queryset grabs only the objects where the owner is the current user.
     offers = Offer.objects.filter(family__parent=current_user)#.values('description', 'photo', 'dib__owner__username')     
-    print("All the offers:")
-    print(offers)
-
+    
     #TODO This works if current user has just one family group. Might break if more than one family group.
     title = "Stuff I'm offering to " + current_user.family.family_name
     
@@ -42,11 +40,8 @@ def index(request):
 def new_offer(request):
     """User can add a new offer."""
     current_user = request.user
-    print("First time:")
-    print(current_user)
     this_family = Family.objects.get(parent=current_user)
-    print("This user's family:")
-    print(this_family)
+    
 
     if request.method != 'POST':
         #No data submitted; create a blank form.
@@ -67,9 +62,7 @@ def new_offer(request):
             #Then save again for real.
             form.save()
             #After user adds new offer, redirect user to offers index page.
-            return redirect('offers:index')
-    print("Second time:")
-    print(current_user)        
+            return redirect('offers:index')      
 
     context = {'form': form}
     return render(request, 'offers/new_offer.html', context)
@@ -78,21 +71,16 @@ def new_offer(request):
 def available_to_me(request):
     """Displays index of offers user can call dibs on."""
     current_user = request.user
-    print(current_user)
 
     offers = Offer.objects.filter(family__member__name=current_user)#.values('dib__owner__username', 'description', 'photo', 'owner__username', 'owner__family__family_name', 'id')
-    #For testing:
-    print("My offers:")
-    print(offers)
     
-    #TODO Make better title that includes the name of the offering parent.
-    title = "Items being offered to me" #+ current_user.family.parent.username + " is offering me"
+    title = "Items being offered to me" 
     
     #Context is the dictionary of info that populates the offers/index template.
     context = {
         "title": title,
         "offers": offers,
-        #"current_user": current_user,
+        "current_user": current_user,
     }
 
     return render(request, 'offers/available_to_me.html', context)
@@ -109,7 +97,6 @@ def add_dib(request):
     else:
         #POST data submitted; process data.
         form = DibForm(request.POST)
-        print(form)
 
         if form.is_valid():
 
@@ -117,10 +104,6 @@ def add_dib(request):
             form = form.save(commit=False)       
             #Here's where I can add extra data and make the object's owner the current user. 
             form.owner = current_user
-            print("The dib owner:")
-            print(form.owner)
-            print("the owner of this offer:")
-            print(form.offer.owner)
             
             #Already hid the dib button in cases where the current user is the offer owner. But just in case,
             #Let's add conditional here to prevent current user from calling dibs on own stuff.
@@ -129,12 +112,10 @@ def add_dib(request):
                 return redirect('offers:available_to_me')
             #Here's where I can make the dib associated with the current offer.
             #form.offer = offer.id
-            #print("The current offer:")
             #Then save again for real.
             else:
                 form.save()
                 #After user adds new offer, redirect user to offers index page.
-                #return HttpResponseRedirect(reverse('offers:index'))
                 return redirect('offers:available_to_me')
         else:
             print("The form is not valid.")
@@ -148,10 +129,8 @@ def all_my_dibs(request):
     current_user = request.user
   
     my_dibs = Offer.objects.filter(dib__owner=current_user)#.values('description', 'photo')
-    print("Stuff I've called dibs on:")
-    print(my_dibs)
 
-    title = "Items I've called dibs on" #+ current_user.family.parent.username + " is offering me"
+    title = "Items I've called dibs on" 
     
     #Context is the dictionary of info that populates the offers/index template.
     context = {
@@ -166,8 +145,8 @@ def all_my_dibs(request):
 def dibs_on_my_stuff(request):
   
     current_user = request.user
-    offers = Offer.objects.filter(family__parent=current_user)#.values('dib', 'description', 'photo')  
-    title = "My items that people have called dibs on" #+ current_user.family.parent.username + " is offering me"
+    offers = Offer.objects.filter(family__parent=current_user)  
+    title = "My items that people have called dibs on"
     
     #Context is the dictionary of info that populates the offers/index template.
     context = {

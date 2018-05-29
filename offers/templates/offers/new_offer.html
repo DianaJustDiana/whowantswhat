@@ -1,18 +1,16 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <!--
     <p><a href="{% url 'logout' %}">Click here to log out</a></p> 
     <p><a href="{% url 'home' %}">Click here to return to the home page</a></p>
 -->
-    <p>Add a new offer:</p>
-    <!--<form action=/offers/new_offer/ -->
-    <!--The above works fine as well.-->
-    <form action="{% url 'offers:new_offer' %}" method='post' enctype='multipart/form-data'>
-        <!--For security.-->
-        {% csrf_token %}
-        <!--Renders form elements inside paragraph tags.-->
-        {{ form.as_p}}
-        <button name="submit">Add offer</button>
-    </form>
+<p>Add a new offer:</p>
+<!--<form action=/offers/new_offer/ -->
+<!--The above works fine as well.-->
+<form action="{% url 'offers:new_offer' %}" method='post' enctype='multipart/form-data'>
+    <!--For security.-->
+    {% csrf_token %}
+    <!--Renders form elements inside paragraph tags.-->
+    {{ form.as_p}}
+    <button name="submit">Add offer</button>
+</form>
 {% endblock content %}
