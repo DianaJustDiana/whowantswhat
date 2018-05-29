@@ -1,13 +1,19 @@
 {% extends 'base.html' %} {% block content %}
+<br>
 
 <h1>{{ title }}</h1>
-{% if not my_dibs %}
+{% if offer.dib_set.all == 0 %}
 <p>Nothing yet</p>
 {% else %}
 <ul>
-    {% for each in my_dibs %}
+    <!--TODO Make this work! Need to filter out offers that have no dibs.-->
+    {% for offer in offers %} {% if offer.dib_set != None %}
+
     <div class="gallery">
-        <img src="/media/{{ each.offer.photo }}" alt="TODO" width="300">
-        <div class="desc">{{ each.offer.description }}</div>
+        <img src="/media/{{ offer.photo }}" alt="TODO" width="300">
+        <div class="desc">{{ offer.description }}</div>
+        <!--An offer has many dibs. A dib belongs to an offer AND to an owner.-->
+        <!--To access the attributes of a dib, use dib_set.-->
+        {% for each in offer.dib_set.all %}
         <div class="desc">{{ each.owner.username }} called dibs!</div>
-        {% endfor %} {% endif %} {% endblock content %}
+        {% endfor %} {% endif %} {% endfor %} {% endif %} {% endblock content %}

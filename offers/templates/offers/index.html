@@ -13,18 +13,17 @@
 {% if not offers %}
 <p>Nothing yet</p>
 {% else %}
-
 <ul>
     {% for offer in offers %}
 
     <div class="gallery">
         <img src="/media/{{ offer.photo }}" alt="TODO" width="300">
         <div class="desc">{{ offer.description }}</div>
-        {% if offer.dib__owner__username == None %}
-        <div class="desc">No dibs yet.</div>
-        {% else %}
-        <div class="desc">{{ offer.dib__owner__username }} calls dibs!</div>
-        {% endif %}
+        <!--An offer has many dibs. A dib belongs to an offer AND to an owner.-->
+        <!--To access the attributes of a dib, use dib_set.-->
+        {% for each in offer.dib_set.all %}
+        <div class="desc">{{ each.owner.username }} called dibs!</div>
+        {% endfor %}
     </div>
     {% endfor%}
 

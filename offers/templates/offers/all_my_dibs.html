@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% block content %}
+<br>
 
 <h1>{{ title }}</h1>
 {% if not my_dibs %}
@@ -12,6 +13,8 @@
         <div class="desc">{{ each.description }}</div>
         <div class="desc">Offered by {{ each.owner.username }}</div>
 
-        <div class="desc">To members of {{ each.family }}</div>
+        <div class="desc">To members of {{ each.family.family_name }}</div>
 
-        {% endfor %} {% endif %} {% endblock content %}
+        {% for something in each.dib_set.all %}
+        <div class="desc">{{ something.owner.username }} called dibs!</div>
+        {% endfor %} {% endfor %} {% endif %} {% endblock content %}

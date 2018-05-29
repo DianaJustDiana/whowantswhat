@@ -19,17 +19,11 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     """Displays index of offers created by user."""    
     current_user = request.user
-    #This queryset grabs only the objects where the owner is the current user.
-    offers = Offer.objects.filter(family__parent=current_user).values('dib__owner__username', 'description', 'photo')
 
+    #This queryset grabs only the objects where the owner is the current user.
+    offers = Offer.objects.filter(family__parent=current_user)#.values('description', 'photo', 'dib__owner__username')     
     print("All the offers:")
     print(offers)
-
-
-
-##SELECT Offers_Offer.description, Offers_Offer.photo, Offers_Dib.owner_id, Offers_Dib.id
-##FROM Offers_Offer
-##INNER JOIN Offers_Dib ON Offers_Offer.ID=Offers_Dib.Offer_ID
 
     #TODO This works if current user has just one family group. Might break if more than one family group.
     title = "Stuff I'm offering to " + current_user.family.family_name
@@ -38,8 +32,7 @@ def index(request):
     context = {
         "title": title,
         "offers": offers,
-        "current_user": current_user,
-    }
+        }
 
     return render(request, 'offers/index.html', context)
     
@@ -74,7 +67,6 @@ def new_offer(request):
             #Then save again for real.
             form.save()
             #After user adds new offer, redirect user to offers index page.
-            #return HttpResponseRedirect(reverse('offers:index'))
             return redirect('offers:index')
     print("Second time:")
     print(current_user)        
@@ -88,33 +80,11 @@ def available_to_me(request):
     current_user = request.user
     print(current_user)
 
-
-    offers = Offer.objects.filter(family__member__name=current_user).values('dib__owner__username', 'description', 'photo', 'owner__username', 'owner__family__family_name')
-
-    #This queryset grabs only the objects where the member is the current user.
-    #It grabs family objects that have a member with name field matching current user.
-    #The double underscore is important!!
-    ##my_family_groups = Family.objects.filter(member__name=current_user)
-    
-    ##print("User's family groups:")
-    ##print(my_family_groups)
-
-    #For testing:
-    ##for each in my_family_groups:
-    ##    print("My family:")
-    ##    print(each)
-    #This queryset grabs all offers available to each my_family. User might have more than one.
-    ##offers = []    
-    ##for each in my_family_groups:
-    ##    offers += Offer.objects.filter(family=each)#.values('dib', 'description', 'photo')
-    
-    
+    offers = Offer.objects.filter(family__member__name=current_user)#.values('dib__owner__username', 'description', 'photo', 'owner__username', 'owner__family__family_name', 'id')
     #For testing:
     print("My offers:")
     print(offers)
     
-
-
     #TODO Make better title that includes the name of the offering parent.
     title = "Items being offered to me" #+ current_user.family.parent.username + " is offering me"
     
@@ -122,9 +92,7 @@ def available_to_me(request):
     context = {
         "title": title,
         "offers": offers,
-        ##"my_family_groups": my_family_groups,
-        #"dibs": dibs,
-        "current_user": current_user,
+        #"current_user": current_user,
     }
 
     return render(request, 'offers/available_to_me.html', context)
@@ -172,7 +140,7 @@ def add_dib(request):
             print("The form is not valid.")
             
     context = {'form': form}
-    return render(request, 'offers/index.html', context)
+    return render(request, 'offers/available_to_me.html', context)
 
 @login_required(login_url='/')
 def all_my_dibs(request):
@@ -198,23 +166,13 @@ def all_my_dibs(request):
 def dibs_on_my_stuff(request):
   
     current_user = request.user
-    current_family = Family.objects.get(parent=current_user)
-    #print("The current family:")
-    #print(current_family)
-
-    my_dibs = Dib.objects.filter(offer__family=current_family)
-    #print("My dibs:")
-    #print(my_dibs)
-    #for each in my_dibs:
-    #    print(each.owner)
-    #    print(each.offer)
-
+    offers = Offer.objects.filter(family__parent=current_user)#.values('dib', 'description', 'photo')  
     title = "My items that people have called dibs on" #+ current_user.family.parent.username + " is offering me"
     
     #Context is the dictionary of info that populates the offers/index template.
     context = {
         "title": title,
-        "my_dibs": my_dibs,
+        "offers": offers,
     }
 
     return render(request, 'offers/dibs_on_my_stuff.html', context)
