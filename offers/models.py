@@ -16,7 +16,7 @@ class Offer(models.Model):
     added_date = models.DateTimeField(auto_now_add=True)
     #TODO need to add default image.
     #Image will be uploaded to MEDIA_ROOT/offerpics/.
-    photo = models.ImageField(upload_to='offerpics/', default='images/images-9.jpeg')
+    photo = models.ImageField(upload_to='offerpics/', default='images/no_image_available.jpg')
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     family = models.ForeignKey(Family, on_delete=models.CASCADE)
 
