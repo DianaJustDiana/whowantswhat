@@ -104,15 +104,22 @@ def add_dib(request):
             form = form.save(commit=False)       
             #Here's where I can add extra data and make the object's owner the current user. 
             form.owner = current_user
+  
+            #This section checks if user is trying to call dibs on something a second time.
+            #Grab all offers for which current user has already called dibs.
+            current_user_called_these_dibs = Offer.objects.filter(dib__owner=current_user)
+            print("Test me")
+            print(current_user_called_these_dibs)
+            #This checks if dib the current user is trying to add already exists in set of user's dib objects.
+            already_called_dibs_on_this = form.offer in current_user_called_these_dibs            
             
+
             #Already hid the dib button in cases where the current user is the offer owner. But just in case,
-            #Let's add conditional here to prevent current user from calling dibs on own stuff.
-            if form.offer.owner == form.owner:
-                
+            #Let's prevent current user from calling dibs on own stuff.
+            if already_called_dibs_on_this or (form.offer.owner == form.owner):
+                print("Rejected! You already called dibs on this.")
                 return redirect('offers:available_to_me')
-            #Here's where I can make the dib associated with the current offer.
-            #form.offer = offer.id
-            #Then save again for real.
+           
             else:
                 form.save()
                 #After user adds new offer, redirect user to offers index page.
