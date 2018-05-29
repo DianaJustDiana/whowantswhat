@@ -74,6 +74,9 @@ def available_to_me(request):
 
     offers = Offer.objects.filter(family__member__name=current_user)#.values('dib__owner__username', 'description', 'photo', 'owner__username', 'owner__family__family_name', 'id')
     
+    already_called_dibs = Offer.objects.filter(dib__owner=current_user)
+
+
     title = "Items being offered to me" 
     
     #Context is the dictionary of info that populates the offers/index template.
@@ -81,6 +84,7 @@ def available_to_me(request):
         "title": title,
         "offers": offers,
         "current_user": current_user,
+        "already_called_dibs": already_called_dibs,
     }
 
     return render(request, 'offers/available_to_me.html', context)
@@ -169,15 +173,6 @@ def dibs_on_my_stuff(request):
     }
 
     return render(request, 'offers/dibs_on_my_stuff.html', context)
-
-
-##
-##     current_user_called_these_dibs = Offer.objects.filter(dib__owner=current_user)
-##            print("Test me")
-##            print(current_user_called_these_dibs)
-##            #This checks if dib the current user is trying to add already exists in set of user's dib objects.
-##            already_called_dibs_on_this = form.offer in current_user_called_these_dibs            
-            
          
 
 
