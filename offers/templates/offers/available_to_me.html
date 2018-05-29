@@ -29,14 +29,15 @@
         {% endfor %}
 
         <!--Hide the dib button so user can't call dibs on own offers.-->
-        {% if offer.owner != current_user %}
+        <!--Hide the dib button if user already called dibs on offer.-->
+        {% if offer.owner != current_user %} {% if offer not in already_called_dibs %}
         <form action="{% url 'offers:add_dib' %}" method='post'>
             <!--For security.-->
             {% csrf_token %}
             <input type="hidden" name="offer" value="{{offer.id}}" />
             <input type="submit" value="I call dibs!" />
         </form>
-        {% endif %}
+        {% endif %} {% endif %}
     </div>
     {% endfor%}
 
