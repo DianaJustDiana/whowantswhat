@@ -1,19 +1,27 @@
 {% extends 'base.html' %} {% block content %}
-<br>
 
 <h1>{{ title }}</h1>
-{% if offer.dib_set.all == 0 %}
-<p>Nothing yet</p>
-{% else %}
-<ul>
-    <!--TODO Make this work! Need to filter out offers that have no dibs.-->
-    {% for offer in offers %}
+<section>
+    {% if offer.dib_set.all == 0 %}
+    <p>Nothing yet</p>
+    {% else %}
+    <div class="posts">
+        <!--TODO Make this work! Need to filter out offers that have no dibs.-->
+        {% for offer in offers %}
+        <article>
+            <a href="#" class="image">
+                <img src="/media/{{ offer.photo }}" alt=""> </a>
 
-    <div class="gallery">
-        <img src="/media/{{ offer.photo }}" alt="TODO" width="300">
-        <div class="desc">{{ offer.description }}</div>
-        <!--An offer has many dibs. A dib belongs to an offer AND to an owner.-->
-        <!--To access the attributes of a dib, use dib_set.-->
-        {% for each in offer.dib_set.all %}
-        <div class="desc">{{ each.owner.username }} called dibs!</div>
-        {% endfor %} {% endfor %} {% endif %} {% endblock content %}
+            <p>{{ offer.description }}</p>
+            <!--An offer has many dibs. A dib belongs to an offer AND to an owner.-->
+            <!--To access the attributes of a dib, use dib_set.-->
+            {% for each in offer.dib_set.all %}
+            <p>{{ each.owner.username }} called dibs!</p>
+            {% endfor %}
+        </article>
+        {% endfor %}
+    </div>
+    {% endif %}
+</section>
+
+{% endblock content %}

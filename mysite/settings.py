@@ -70,10 +70,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],  
-            #TODO Need to figure out why this custom template tag isn't working.
-            #'libraries': {
-            #    'custom_tags': 'family_groups.templatetags.custom_tags', 
-            #    },  
+            
         },
     },
 ]

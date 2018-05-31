@@ -16,16 +16,16 @@
 
 
     <!--<div class="desc">{{ family_group }}</div>-->
-    <div class="desc">Parent:</div>
-    <div class="desc">{{ parent.username }}</div>
-    <div class="desc">{{ parent }}</div>
+    <div>Parent:</div>
+    <div>{{ parent.username }}</div>
+    <div>{{ parent }}</div>
     <br>
-    <div class="desc">Members:</div>
+    <div>Members:</div>
     {% if not members %}
     <p> No members yet </p>
     {% else %} {% for member in members %}
-    <div class="desc">{{ member.name.username }}</div>
-    <div class="desc">{{ member.name}}</div>
+    <div>{{ member.name.username }}</div>
+    <div>{{ member.name}}</div>
     <br> {% endfor %} {% endif %}
     <br> {% endfor %}
 </ul>

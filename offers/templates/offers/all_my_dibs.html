@@ -1,20 +1,29 @@
 {% extends 'base.html' %} {% block content %}
-<br>
 
 <h1>{{ title }}</h1>
-{% if not my_dibs %}
-<p>Nothing yet</p>
-{% else %}
+<section>
 
-<ul>
-    {% for each in my_dibs %}
-    <div class="gallery">
-        <img src="/media/{{ each.photo }}" alt="TODO" width="300">
-        <div class="desc">{{ each.description }}</div>
-        <div class="desc">Offered by {{ each.owner.username }}</div>
+    {% if not my_dibs %}
+    <p>Nothing yet</p>
+    {% else %}
 
-        <div class="desc">To members of {{ each.family.family_name }}</div>
+    <div class="posts">
+        {% for each in my_dibs %}
+        <article>
+            <a href="#" class="image">
+                <img src="/media/{{ each.photo }}" alt="">
+            </a>
 
-        {% for something in each.dib_set.all %}
-        <div class="desc">{{ something.owner.username }} called dibs!</div>
-        {% endfor %} {% endfor %} {% endif %} {% endblock content %}
+            <p>{{ each.description }}</p>
+            <p>Offered by {{ each.owner.username }}
+                <br> To members of {{ each.family.family_name }}</p>
+
+            {% for something in each.dib_set.all %}
+            <p>{{ something.owner.username }} called dibs!</p>
+            {% endfor %}
+        </article>
+
+        {% endfor %}
+    </div>
+    {% endif %}
+</section>{% endblock content %}
