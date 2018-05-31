@@ -19,73 +19,43 @@
 
 <body>
     <!--navbar-->
-    <main>
-        <header id="header">
+    <nav>
 
 
-            {% if user.is_authenticated %}
-            <li>
-                <p>Hi, {{ user.username }}!</p>
-            </li>
-            {% endif %}
+        {% if user.is_authenticated %}
+        <p>Hi, {{ user.username }}!</p>
+        {% endif %}
 
-            <nav id="nav">
-                <ul>
-                    <h1>
-                        <a class="icon fa-home" href="{% url 'home' %}"><span>WhoWantsWhat</span></a>
-                    </h1>
-                    {% if user.is_authenticated and user.family.parent%}
-                    <li>
-                        <a href="{% url 'offers:index' %}">See what I'm offering</a>
-                    </li>
-                    {% endif %} {% if user.is_authenticated and user.family.parent%}
-                    <li>
-                        <a href="{% url 'offers:dibs_on_my_stuff' %}">See the dibs on my stuff</a>
-                    </li>
-                    {% endif %} {% if user.is_authenticated%}
-                    <li>
-                        <a href="{% url 'offers:available_to_me' %}">See items available to me</a>
-                    </li>
-                    {% endif %} {% if user.is_authenticated%}
-                    <li>
-                        <a href="{% url 'offers:all_my_dibs' %}">See my dibs</a>
-                    </li>
-                    {% endif %} {% if user.is_authenticated and user.family.parent%}
-                    <li>
-                        <a href="{% url 'offers:new_offer' %}">Add an offer</a>
-                    </li>
-                    {% endif %} {% if user.is_authenticated%}
-                    <li>
-                        <a href="{% url 'family_groups:create_a_family' %}">Create a family group</a>
-                    </li>
-                    {% endif %} {% if user.is_authenticated and user.family.parent%}
-                    <li>
-                        <a href="{% url 'family_groups:add_members' %}">Edit my family group</a>
-                    </li>
-                    {% endif %} {% if user.is_authenticated and user.family.parent%}
-                    <li>
-                        <a href="{% url 'family_groups:index' %}">See my family group</a>
-                    </li>
-                    {% endif %} {% if user.is_authenticated %}
-                    <li>
-                        <a href="{% url 'logout' %}">Log out</a>
-                        {% else %}
-                        <a href="{% url 'login' %}">Log in</a>
-                    </li>
-                    {% endif %} {% if not user.is_authenticated %}
-                    <li>
-                        <a href="{% url 'signup' %}">Register</a>
-                    </li>
-                    {% endif %} {% if user.is_superuser %}
-                    <li>
-                        <a href="/unsweetenedicedtea">Admin</a>
-                    </li>
-                    {% endif %}
+        <a id="logo" href="{% url 'home' %}">
+            WhoWantsWhat
+        </a>
+        {% if user.is_authenticated and user.family.parent%}
+        <a href="{% url 'offers:index' %}">See what I'm offering</a>
+        {% endif %} {% if user.is_authenticated and user.family.parent%}
+        <a href="{% url 'offers:dibs_on_my_stuff' %}">See the dibs on my stuff</a>
+        {% endif %} {% if user.is_authenticated%}
+        <a href="{% url 'offers:available_to_me' %}">See items available to me</a>
+        {% endif %} {% if user.is_authenticated%}
+        <a href="{% url 'offers:all_my_dibs' %}">See my dibs</a>
+        {% endif %} {% if user.is_authenticated and user.family.parent%}
+        <a href="{% url 'offers:new_offer' %}">Add an offer</a>
+        {% endif %} {% if user.is_authenticated%}
+        <a href="{% url 'family_groups:create_a_family' %}">Create a family group</a>
+        {% endif %} {% if user.is_authenticated and user.family.parent%}
+        <a href="{% url 'family_groups:add_members' %}">Edit my family group</a>
+        {% endif %} {% if user.is_authenticated and user.family.parent%}
+        <a href="{% url 'family_groups:index' %}">See my family group</a>
+        {% endif %} {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Log out</a>
+        {% else %}
+        <a href="{% url 'login' %}">Log in</a>
+        {% endif %} {% if not user.is_authenticated %}
+        <a href="{% url 'signup' %}">Register</a>
+        {% endif %} {% if user.is_superuser %}
+        <a href="/unsweetenedicedtea">Admin</a>
+        {% endif %}
 
-                </ul>
-            </nav>
-        </header>
-    </main>
+    </nav>
 
 
 

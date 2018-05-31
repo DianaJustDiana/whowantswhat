@@ -7,88 +7,55 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-
-/* Header */
-
-#header {
-	position: relative;
-	border-bottom: solid 2px #e5e5e5;
-	box-shadow: inset 0px -8px 0px 0px #fff, inset 0px -10px 0px 0px #e5e5e5;
+/* we'll target the entire nav */
+nav {
+	width: 100%; /* width should be a percentage for responsiveness */
+	height: 38px; /* height should be px. Adjust to your liking */
+	background-color: #0b98de; /* hex color code should be used */
+	overflow: hidden;
 }
 
-	#header h1 {
-		font-family: 'Arvo';
-		font-weight: 700;
-		color: #ed786a;
-		text-shadow: 0.05em 0.075em 0 rgba(0, 0, 0, 0.1);
-	}
+/*we'll target a specific tab*/
+nav a {
+	display: block;
+	float: left;
+	/* We're just setting up font settings here */
 
-		#header h1 a {
-			border: 0;
-		}
+	font-family: sans-serif;
+	font-size: 9px;
+	color: white;
 
-	#header p {
-		text-transform: uppercase;
-		font-weight: 400;
-		color: #888;
-	}
+	/* Padding the box*/
+	padding-top: 20px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
 
-
-/* Nav */
-
-
-
-#nav {
-	cursor: default;
+	/* Remove link decoration */
+	text-decoration: none;
 }
 
-	#nav > ul > li > a {
-		border: 0;
-		text-decoration: none;
-		text-transform: uppercase;
-		font-weight: 400;
-		color: #777;
-		outline: 0;
-	}
+/*we're going to use a css pseudo-class to change the background color when we hover over a tab */
+nav a:hover {
+}
+/*we're going to target the logo for some specific styles 'cause the logo is super special*/
+#logo {
+	/* font */
+	font-family: 'Hind', sans-serif;
+	font-size: 30px;
+	letter-spacing: -2px;
+	text-shadow: 1px 1px 2px #c4c4c4;
 
-		#nav > ul > li > a:before {
-			display: inline-block;
-			background: #878787;
-			color: #e4e4e4;
-			width: 1.65em;
-			height: 1.65em;
-			border-radius: 1.65em;
-			line-height: 1.65em;
-			text-align: center;
-			box-shadow: 0.125em 0.175em 0 0 rgba(0, 0, 0, 0.125);
-			margin-right: 0.75em;
-			-moz-transition: color 0.25s ease-in-out, background 0.25s ease-in-out;
-			-webkit-transition: color 0.25s ease-in-out, background 0.25s ease-in-out;
-			-o-transition: color 0.25s ease-in-out, background 0.25s ease-in-out;
-			-ms-transition: color 0.25s ease-in-out, background 0.25s ease-in-out;
-			transition: color 0.25s ease-in-out, background 0.25s ease-in-out;
-		}
-
-		#nav > ul > li > a > span {
-			-moz-transition: color 0.25s ease-in-out;
-			-webkit-transition: color 0.25s ease-in-out;
-			-o-transition: color 0.25s ease-in-out;
-			-ms-transition: color 0.25s ease-in-out;
-			transition: color 0.25s ease-in-out;
-		}
-
-	#nav > ul > li.active > a:before, #nav > ul > li:hover > a:before {
-		background: #ED786A;
-		color: #fff;
-	}
-
-	#nav > ul > li.active > a > span, #nav > ul > li:hover > a > span {
-		color: #ED786A;
-	}
+	/* box */
+	padding-left: 20px;
+	padding-right: 40px;
+	margin-right: 10px;
+	margin-top: -20px;
+}
 
 /* Reset */
-
-	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+/* Diana removed nav from this*/
+	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, output, ruby, section, summary, time, mark, audio, video {
 		margin: 0;
 		padding: 0;
 		border: 0;
@@ -96,8 +63,8 @@
 		font: inherit;
 		vertical-align: baseline;
 	}
-
-	article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+/* Diana removed nav from this*/
+	article, aside, details, figcaption, figure, footer, header, hgroup, menu, section {
 		display: block;
 	}
 
