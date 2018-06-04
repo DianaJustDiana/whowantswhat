@@ -9,24 +9,27 @@
 
 
 {% if not family_groups %}
-<p>But feel free to create one!</p>
+<p>None yet. But feel free to create one!</p>
 {% else %}
 <ul>
     {% for family_group in family_groups %}
 
-
-    <!--<div class="desc">{{ family_group }}</div>-->
-    <div>Parent:</div>
-    <div>{{ parent.username }}</div>
-    <div>{{ parent }}</div>
+    <div>Group name:</div>
+    <div>{{ family_group.family_name }}</div>
     <br>
+    <!--<div>Parent:</div>
+    <div>{{ family_group.parent.username }}</div>
+    <div>{{ family_group.parent }}</div>
+    <br>-->
     <div>Members:</div>
-    {% if not members %}
+    {% if family_group.member_set.all.count == 0 %}
     <p> No members yet </p>
-    {% else %} {% for member in members %}
+    {% else %} {% for member in family_group.member_set.all %}
+
     <div>{{ member.name.username }}</div>
     <div>{{ member.name}}</div>
     <br> {% endfor %} {% endif %}
+
     <br> {% endfor %}
 </ul>
 

@@ -13,5 +13,5 @@ class AddMembersForm(forms.ModelForm):
     class Meta:
         model = Member
         #TODO Need to limit family choices to those where parent = current user.
-        fields = ['name']
-        labels = {'name' : 'add a person by email address'}
+        fields = ['family', 'name']
+        labels = {'family': 'choose which family', 'name' : 'add a person by email address'}

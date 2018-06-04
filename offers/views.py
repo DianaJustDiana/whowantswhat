@@ -24,7 +24,7 @@ def index(request):
     offers = Offer.objects.filter(family__parent=current_user)#.values('description', 'photo', 'dib__owner__username')     
     
     #TODO This works if current user has just one family group. Might break if more than one family group.
-    title = "Stuff I'm offering to " + current_user.family.family_name
+    title = "Stuff I'm offering" #to " + current_user.family.family_name
     
     #Context is the dictionary of info that populates the offers/index template.
     context = {

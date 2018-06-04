@@ -32,18 +32,17 @@
                 WhoWantsWhat
             </a>
         </li>
-        {% if user.is_authenticated and user.family.parent %}
+        {% if user.is_authenticated %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'offers:new_offer' %}">Add an offer</a>
         </li>
 
-        {% endif %} 
-        {% if user.is_authenticated and user.family.parent %}
+        {% endif %} {% if user.is_authenticated %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'offers:index' %}">See what I'm offering</a>
         </li>
 
-        {% endif %} {% if user.is_authenticated and user.family.parent %}
+        {% endif %} {% if user.is_authenticated %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'offers:dibs_on_my_stuff' %}">See the dibs on my stuff</a>
         </li>
@@ -57,17 +56,12 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url 'offers:all_my_dibs' %}">See my dibs</a>
         </li>
-
-        {% endif %} {% if user.is_authenticated and not user.family.parent %}
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'family_groups:create_a_family' %}">Create a family group</a>
-        </li>
-        {% endif %} {% if user.is_authenticated and user.family.parent %}
+        {% endif %} {% if user.is_authenticated %}
 
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">My family group(s)</a>
             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">
-                <a class="dropdown-item" href="{% url 'family_groups:create_a_family' %}">Create another family group</a>
+                <a class="dropdown-item" href="{% url 'family_groups:create_a_family' %}">Create a(nother) family group</a>
                 <a class="dropdown-item" href="{% url 'family_groups:add_members' %}">Add to my family group(s)</a>
                 <a class="dropdown-item" href="{% url 'family_groups:index' %}">See my family group(s)</a>
 

@@ -60,7 +60,8 @@ def add_members(request):
             current_user = request.user
             #print("This is the current user:")
             #print(current_user)
-            current_family = Family.objects.get(parent=current_user)
+            #current_family = Family.objects.get(parent=current_user)
+            current_family = form.family
             #print("This is the current family group:"
             #print(current_family)
             test_this_member = form.name
@@ -75,7 +76,6 @@ def add_members(request):
             #print(already_a_member)
             #print("The parent of this group:")
             #print(current_family.parent)
-            
             #See if the member the current user wants to add IS the current user.
             #TODO Prevent family parent from adding self as member.
             if already_a_member or (test_this_member == current_user):
@@ -105,27 +105,32 @@ def index(request):
     current_user = request.user
     #If current user is parent to a family group, this will gather them.
     #TODO Why is this broken? If current user is NOT a parent, this throws an error.
-    my_family_group = Family.objects.filter(parent=current_user)
+    my_family_groups = Family.objects.filter(parent=current_user)#.values('member__name__username', 'family_name', 'parent__username')
+    print("my family group(s)")
+    print(my_family_groups)
+
     #TODO Marking this QuerySet so I can find it easily. Important part is member_set.
     #Adding condition so if there are no family groups the variable f never enters the picture.    
-    if my_family_group:
-        f = Family.objects.get(parent=current_user)
-        members = f.member_set.all()
-        family_name = f.family_name
-        parent = f.parent
+    #if my_family_groups:
+    #for each in my_family_groups:
+    #    members = each.member_set.all()
+    #    family_name = each.family_name
+    #    parent = each.parent
+
+
     
     #Need this because next part with context variables needs something for members.
-    else:
-        family_name = "No family group yet"
-        members = None
-        parent = None
+    #else:
+    #    family_name = "No family group yet"
+    #    members = None
+    #    parent = None
 
     #Context is the dictionary of info that populates the family_groups/index template.
     context = {
-        "title": family_name,
-        "family_groups": my_family_group,
-        "members": members,
-        "parent": parent,
+        "title": "My family groups",
+        "family_groups": my_family_groups,
+        #"members": members,
+        #"parent": parent,
     }
 
     return render(request, 'family_groups/index.html', context)
