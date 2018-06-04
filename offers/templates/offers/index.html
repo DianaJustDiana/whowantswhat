@@ -7,6 +7,7 @@
     So here it's 'offers:new_offer' instead of simply 'new_offer.
     WARNING: It's 'new_offer' in urls.py but here it needs to be 'offers:new_offer'-->
 <!--<p><a href="{% url 'offers:new_offer' %}" >Click here to add an offer</a></p> -->
+<br>
 <h1>{{ title }}</h1>
 <section>
     {% if not offers %}
@@ -19,6 +20,7 @@
                 <img src="/media/{{ offer.photo }}" alt="" />
             </a>
             <p>{{ offer.description }}</p>
+            <br> To members of {{ offer.family.family_name }}
             <!--An offer has many dibs. A dib belongs to an offer AND to an owner.-->
             <!--To access the attributes of a dib, use dib_set.-->
             {% for each in offer.dib_set.all %}

@@ -40,7 +40,7 @@ def index(request):
 def new_offer(request):
     """User can add a new offer."""
     current_user = request.user
-    this_family = Family.objects.get(parent=current_user)
+    #this_family = Family.objects.get(parent=current_user)
     
 
     if request.method != 'POST':
@@ -58,7 +58,7 @@ def new_offer(request):
             #Here's where I can add extra data and make the object's owner the current user. 
             form.owner = request.user
             #Here's where I can make the object's family the current user's family.
-            form.family = this_family
+            #form.family = this_family
             #Then save again for real.
             form.save()
             #After user adds new offer, redirect user to offers index page.
@@ -73,8 +73,12 @@ def available_to_me(request):
     current_user = request.user
 
     offers = Offer.objects.filter(family__member__name=current_user)#.values('dib__owner__username', 'description', 'photo', 'owner__username', 'owner__family__family_name', 'id')
-    
+    print("offers:")
+    print(offers)
+
     already_called_dibs = Offer.objects.filter(dib__owner=current_user)
+    print("already called dibs:")
+    print(already_called_dibs)
 
 
     title = "Items being offered to me" 
