@@ -32,7 +32,12 @@
                 WhoWantsWhat
             </a>
         </li>
+        {% if user.is_authenticated and user.family.parent %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'offers:new_offer' %}">Add an offer</a>
+        </li>
 
+        {% endif %} 
         {% if user.is_authenticated and user.family.parent %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'offers:index' %}">See what I'm offering</a>
@@ -43,19 +48,14 @@
             <a class="nav-link" href="{% url 'offers:dibs_on_my_stuff' %}">See the dibs on my stuff</a>
         </li>
 
-        {% endif %} {% if user.is_authenticated and user.family.member.name %}
+        {% endif %} {% if user.is_authenticated %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'offers:available_to_me' %}">See items available to me</a>
         </li>
 
-        {% endif %} {% if user.is_authenticated and user.family.member.name %}
+        {% endif %} {% if user.is_authenticated %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'offers:all_my_dibs' %}">See my dibs</a>
-        </li>
-
-        {% endif %} {% if user.is_authenticated and user.family.parent %}
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'offers:new_offer' %}">Add an offer</a>
         </li>
 
         {% endif %} {% if user.is_authenticated and not user.family.parent %}
