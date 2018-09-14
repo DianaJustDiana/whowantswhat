@@ -7,7 +7,17 @@
     <!--For security.-->
     {% csrf_token %}
     <!--Renders form elements inside paragraph tags.-->
-    {{ form.as_p}}
+    {{ form.as_p }}
+    <!--<input type="select" name="name" placeholder="Name of person" />
+
+    <select name="family" placeholder="Name of family group">
+        {% for each in family %}
+
+            <option>{{ each }}</option>
+        {% endfor %}
+    </select>
+    -->
     <button name="submit">Add a member</button>
+
 </form>
 {% endblock content %}

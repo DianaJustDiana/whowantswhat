@@ -49,9 +49,16 @@ def add_members(request):
     """Parent of family group can add members."""
     if request.method != 'POST':
         #No data submitted; create a blank form.
+        ##Need to add this back if I want the current user to be the one taking action.
+        ##form = AddMembersForm(request.user)
+        ##And need to remove this.
         form = AddMembersForm()
     else:
+        ##Need to add this back if I want the current user to be the one taking action.
+        ##form = AddMembersForm(request.POST, current_user=request.user)
+        ##And need to remove this.
         form = AddMembersForm(request.POST)
+
 
         if form.is_valid():
             #Saving the form with commit=False generates an object called "form."
@@ -60,6 +67,9 @@ def add_members(request):
             current_user = request.user
             #print("This is the current user:")
             #print(current_user)
+
+            #all_my_family_groups = Family.objects.filter(parent=current_user)
+
             #current_family = Family.objects.get(parent=current_user)
             current_family = form.family
             #print("This is the current family group:"
@@ -94,7 +104,11 @@ def add_members(request):
                 return redirect('offers:index')
 
             #TODO end test this out
-    context = {'form': form}
+    context = {
+        'form': form,
+        #'all_my_family_groups': all_my_family_groups,
+    }
+
     return render(request, 'family_groups/add_members.html', context) 
 
 #Should be a GET request. That's the default, so no need to specify.
