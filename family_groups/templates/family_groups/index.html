@@ -6,31 +6,33 @@
     WARNING: It's 'new_offer' in urls.py but here it needs to be 'offers:new_offer'-->
 <!--<p><a href="{% url 'offers:new_offer' %}" >Click here to add an offer</a></p> -->
 <h1> {{ title }}</h1>
+<section>
 
 
-{% if not family_groups %}
-<p>None yet. But feel free to create one!</p>
-{% else %}
-<ul>
-    {% for family_group in family_groups %}
+    {% if not family_groups %}
+    <p>None yet. But feel free to create one!</p>
+    {% else %}
+    <ul>
+        {% for family_group in family_groups %}
 
-    <div>Group name:</div>
-    <div>{{ family_group.family_name }}</div>
-    <br>
-    <!--<div>Parent:</div>
+        <div>Group name:</div>
+        <div>{{ family_group.family_name }}</div>
+        <br>
+        <!--<div>Parent:</div>
     <div>{{ family_group.parent.username }}</div>
     <div>{{ family_group.parent }}</div>
     <br>-->
-    <div>Members:</div>
-    {% if family_group.member_set.all.count == 0 %}
-    <p> No members yet </p>
-    {% else %} {% for member in family_group.member_set.all %}
+        <div>Members:</div>
+        {% if family_group.member_set.all.count == 0 %}
+        <p> No members yet </p>
+        {% else %} {% for member in family_group.member_set.all %}
 
-    <div>{{ member.name.username }}</div>
-    <div>{{ member.name}}</div>
-    <br> {% endfor %} {% endif %}
+        <div>{{ member.name.username }}</div>
+        <div>{{ member.name}}</div>
+        <br> {% endfor %} {% endif %}
 
-    <br> {% endfor %}
-</ul>
+        <br> {% endfor %}
+    </ul>
+</section>
 
 {% endif %} {% endblock content %}
