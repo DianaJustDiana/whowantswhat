@@ -11,6 +11,7 @@ class OfferForm(forms.ModelForm):
         labels = {'family': 'Choose which family',
                   'description': 'A brief description', 'photo': 'Add your photo'}
 
+    # This section limits dropdown options to stuff owned by the current user.
     def __init__(self, request, *args, **kwargs):
         super(OfferForm, self).__init__(*args, **kwargs)
         queryset = Family.objects.filter(parent=request)
