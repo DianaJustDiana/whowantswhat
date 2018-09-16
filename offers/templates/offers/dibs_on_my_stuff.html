@@ -2,7 +2,8 @@
 <br>
 <h1>{{ title }}</h1>
 <section>
-    {% if offer.dib_set.all == 0 %}
+    <!--This checks dib_set to see if it's empty aka length of 0.-->
+    {% if offer.dib_set.all|length == 0 %}
     <p>Nothing yet</p>
     {% else %}
     <div class="posts">
