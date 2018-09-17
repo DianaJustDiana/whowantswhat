@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 
 from .forms import CreateAFamilyForm, AddMembersForm
 
-from .models import Family, Member, User
+from .models import Family, Member
 
 
 # Need for @login required decorator.
@@ -63,7 +63,7 @@ def add_members(request):
         # Need to add this back if I want the current user to be the one taking action.
         ##form = AddMembersForm(request.POST, current_user=request.user)
         # And need to remove this.
-        #The order here is IMPORTANT. The user part has to come first.
+        # The order here is IMPORTANT. The user part has to come first.
         form = AddMembersForm(request.user, request.POST)
 
         if form.is_valid():
